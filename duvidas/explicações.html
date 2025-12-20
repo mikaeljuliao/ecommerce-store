@@ -1,0 +1,175 @@
+<!--
+================================================================================
+DÚVIDA: Por que não usei o StrictMode no início do projeto?
+================================================================================
+
+No início do projeto, optei por NÃO usar o StrictMode do React, mesmo ele sendo
+o padrão do template do Vite + React + TypeScript.
+
+O StrictMode existe apenas em ambiente de desenvolvimento e serve para ajudar
+a identificar problemas como:
+- efeitos colaterais
+- uso de APIs legadas
+- padrões inseguros de código
+
+Porém, no React 18, o StrictMode funciona de uma forma específica:
+ele executa propositalmente algumas partes do código DUAS VEZES em desenvolvimento.
+
+Isso inclui:
+- useEffect
+- inicializações de estado
+- algumas lógicas internas
+- possíveis chamadas de API
+
+Isso NÃO é bug, é comportamento intencional do React.
+
+O problema é que, no início do projeto, isso atrapalha o aprendizado e o debug,
+principalmente quando estamos lidando com:
+- reducers
+- regras de negócio (carrinho)
+- chamadas de API
+- localStorage
+
+Exemplos de confusão que podem acontecer:
+- A API parece estar sendo chamada duas vezes
+- Um item pode parecer duplicado no carrinho
+- Um efeito parece "quebrado", quando na verdade é o StrictMode
+
+Como o foco inicial do projeto é:
+- entender a lógica
+- modelar bem os tipos com TypeScript
+- construir a arquitetura corretamente
+
+o StrictMode foi desativado temporariamente.
+
+Importante: isso NÃO significa que o StrictMode é ruim ou não será usado.
+Ele pode (e deve) ser reativado depois, quando a lógica estiver sólida
+e o comportamento da aplicação estiver bem entendido.
+
+================================================================================
+RESUMO:
+- StrictMode roda código duas vezes em dev
+- Isso pode gerar confusão no início
+- Foi desativado conscientemente
+- Pode ser reativado mais tarde
+================================================================================
+-->
+
+
+
+<!--
+================================================================================
+DÚVIDA: Por que validar o container antes de usar createRoot?
+================================================================================
+
+Ao montar a aplicação React, usamos esse código:
+
+const container = document.getElementById('root')
+
+O método getElementById pode retornar dois valores:
+- um elemento HTML (HTMLElement)
+- ou null, caso o elemento não exista
+
+Ou seja, para o TypeScript, o tipo de container é:
+HTMLElement | null
+
+O problema é que o React NÃO aceita null no createRoot.
+Ele exige um elemento HTML válido.
+
+Se passarmos null, a aplicação pode:
+- quebrar
+- não renderizar nada
+- gerar erro difícil de entender
+
+Por isso, fazemos a verificação:
+
+if (!container) {
+  throw new Error('Root container missing')
+}
+
+Essa verificação serve para:
+- garantir que o elemento realmente existe
+- interromper a aplicação imediatamente se algo estiver errado
+- mostrar um erro claro no console
+
+Isso é muito melhor do que deixar a aplicação falhar silenciosamente.
+
+================================================================================
+IMPORTANTE PARA O TYPESCRIPT
+================================================================================
+
+Depois desse if, o TypeScript entende automaticamente que:
+- se o código chegou aqui
+- então container NÃO é null
+
+Isso se chama "type narrowing" (estreitamento de tipo).
+
+Antes do if:
+HTMLElement | null
+
+Depois do if:
+HTMLElement
+
+Isso elimina a necessidade de usar o operador ! (non-null assertion).
+
+================================================================================
+COMPARAÇÃO COM O OPERADOR !
+================================================================================
+
+Forma mais comum (menos segura):
+
+createRoot(document.getElementById('root')!).render(...)
+
+O ! basicamente diz:
+"confia em mim, isso nunca será null"
+
+O problema:
+- se for null, o erro acontece do mesmo jeito
+- o TypeScript deixa de proteger
+- o código fica menos seguro
+
+Forma usada no projeto (mais profissional):
+
+const container = document.getElementById('root')
+
+if (!container) {
+  throw new Error('Root container missing')
+}
+
+createRoot(container).render(...)
+
+Essa abordagem:
+- é mais explícita
+- é mais segura
+- mostra maturidade técnica
+- facilita debug
+- mantém o TypeScript trabalhando a favor
+
+================================================================================
+ANALOGIA SIMPLES
+================================================================================
+
+É como tentar usar dinheiro sem saber se ele existe:
+
+Errado:
+comprarAlgo(dinheiro!)
+
+Correto:
+if (!dinheiro) {
+  throw new Error('Sem saldo')
+}
+
+comprarAlgo(dinheiro)
+
+================================================================================
+RESUMO FINAL
+================================================================================
+
+- getElementById pode retornar null
+- React não aceita null no createRoot
+- O if garante segurança
+- O erro fica explícito
+- Evita uso desnecessário do !
+- Código mais profissional e confiável
+================================================================================
+-->
