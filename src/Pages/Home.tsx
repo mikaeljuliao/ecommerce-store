@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Product } from '../types/Product'
+import type { Product } from '../types/Product'
 import { getAllProducts } from '../services/products'
 
 export function Home() {

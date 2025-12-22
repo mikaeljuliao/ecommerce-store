@@ -306,3 +306,152 @@ quando a base do projeto estiver sólida.
 
 ================================================================================
 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+===========================================
+ANOTAÇÃO IMPORTANTE — TYPESCRIPT + RUNTIME
+===========================================
+
+Essa foi, de longe, a parte MAIS CONFUSA do início do projeto.
+Quase desisti aqui, então estou documentando com bastante detalhe
+pra nunca mais passar por isso.
+
+-------------------------------------------
+1️⃣ O QUE SIGNIFICA "EXISTIR EM RUNTIME"?
+-------------------------------------------
+
+"Runtime" é o MOMENTO em que o JavaScript está rodando de verdade,
+ou seja:
+
+- Quando o navegador abre a aplicação
+- Quando o código já virou JavaScript
+- Quando NÃO EXISTE mais TypeScript
+
+👉 Runtime = código final executando no navegador.
+
+-------------------------------------------
+2️⃣ TYPESCRIPT NÃO EXISTE EM RUNTIME
+-------------------------------------------
+
+TypeScript é só uma CAMADA DE DESENVOLVIMENTO.
+
+Antes de rodar no navegador:
+- O TypeScript é COMPILADO
+- Interfaces e types SÃO APAGADOS
+- Só sobra JavaScript
+
+Exemplo:
+
+interface Product {
+  id: number
+  title: string
+}
+
+⬇️ Depois da compilação ⬇️
+
+(NADA)
+
+Isso simplesmente NÃO EXISTE mais.
+
+Ou seja:
+❌ Interface NÃO vira variável
+❌ Interface NÃO vira objeto
+❌ Interface NÃO existe no JavaScript final
+
+Ela só serve para:
+- ajudar o editor
+- evitar erros
+- dar segurança de tipo
+
+-------------------------------------------
+3️⃣ O ERRO QUE ACONTECEU NO PROJETO
+-------------------------------------------
+
+Eu estava importando a interface assim:
+
+import { Product } from '../types/Product'
+
+Isso faz o bundler (Vite) pensar:
+
+"Ok, então em runtime vai existir algo chamado Product"
+
+MAS NÃO EXISTE.
+
+Resultado:
+- O Vite tenta encontrar Product no JavaScript
+- Não acha nada
+- A aplicação quebra
+
+-------------------------------------------
+4️⃣ POR QUE ISSO ACONTECE EM PROJETOS MODERNOS?
+-------------------------------------------
+
+Meu projeto usa configurações modernas, como:
+
+- Vite
+- TypeScript strict
+- moduleResolution: "bundler"
+- verbatimModuleSyntax: true
+
+Essas configs são MAIS RÍGIDAS de propósito.
+
+Elas obrigam o dev a deixar claro:
+- o que é TYPE (só TS)
+- o que é VALUE (existe em runtime)
+
+-------------------------------------------
+5️⃣ A SOLUÇÃO CORRETA (IMPORTANTE)
+-------------------------------------------
+
+Sempre que importar APENAS tipos ou interfaces,
+PRECISO usar:
+
+import type { Product } from '../types/Product'
+
+Isso diz claramente:
+
+"Isso aqui é SÓ PARA O TYPESCRIPT.
+NÃO tente usar isso no JavaScript final."
+
+Assim:
+✅ O TypeScript entende
+✅ O Vite não tenta resolver em runtime
+✅ O erro some
+
+-------------------------------------------
+6️⃣ REGRA DE OURO PRA NUNCA MAIS ERRAR
+-------------------------------------------
+
+🧠 REGRA SIMPLES:
+
+- Interface / type → import type
+- Função / componente / variável → import normal
+
+Exemplos:
+
+✔ import type { Product } from '../types/Product'
+✔ import { getAllProducts } from '../services/products'
+✔ import { useState, useEffect } from 'react'
+
+-->

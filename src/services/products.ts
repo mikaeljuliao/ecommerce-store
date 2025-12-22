@@ -1,4 +1,4 @@
-import { Product } from '../types/Product'
+import type { Product } from '../types/Product'
 
 const API_URL = 'https://fakestoreapi.com/products'
 
@@ -9,6 +9,7 @@ export async function getAllProducts(): Promise<Product[]> {
     throw new Error('Erro ao buscar produtos')
   }
 
-  const data: Product[] = await response.json()
+  const data = (await response.json()) as Product[]
+
   return data
 }
