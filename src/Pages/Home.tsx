@@ -20,7 +20,7 @@ export function Home() {
     }
 
     loadProducts()
-  }, [])
+  }, []) 
 
   if (loading) {
     return <p className="text-white">Carregando...</p>
