@@ -1,10 +1,11 @@
+import { BaseLayout } from './layouts/BaseLayout'
 import { Home } from './Pages/Home'
 
 function App() {
   return (
-    <div className="min-h-screen bg-slate-900">
+    <BaseLayout>
       <Home />
-    </div>
+    </BaseLayout>
   )
 }
 
