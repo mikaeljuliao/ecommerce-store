@@ -1,13 +1,21 @@
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BaseLayout } from './layouts/BaseLayout'
+import {Home} from './Pages/Home'
+import Product from './Pages/Product'
+import Cart from './Pages/Cart'
 
-import './App.css'
 
 function App() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-      <h1 className="text-3xl font-bold">
-        Tailwind v3 funcionando
-      </h1>
-    </div>
+    <BrowserRouter>
+      <BaseLayout>
+        <Routes>
+           <Route path="/" element={<Home />} />
+           <Route path="/produto/:id" element={<Product />} />
+           <Route path="/carrinho" element={<Cart />} />
+        </Routes>
+      </BaseLayout>
+    </BrowserRouter>
   )
 }
 
