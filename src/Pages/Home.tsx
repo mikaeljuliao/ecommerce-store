@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import type { Product } from '../types/Product'
 import { getAllProducts } from '../services/products'
+import { Link } from 'react-router-dom'
 
 export function Home() {
   const [products, setProducts] = useState<Product[]>([])
@@ -33,23 +34,29 @@ export function Home() {
   return (
     <div className="p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
       {products.map(product => (
-        <div
-          key={product.id}
-          className="bg-slate-800 text-white p-4 rounded"
-        >
-          <img
-            src={product.image}
-            alt={product.title}
-            className="h-40 mx-auto object-contain"
-          />
-          <h2 className="mt-4 font-semibold">
-            {product.title}
-          </h2>
-          <p className="mt-2 font-bold">
-            R$ {product.price}
-          </p>
-        </div>
-      ))}
+    <Link
+    key={product.id}
+    to={`/produto/${product.id}`}
+    className="block"
+     >
+    <div className="bg-slate-800 text-white p-4 rounded">
+      <img
+        src={product.image}
+        alt={product.title}
+        className="h-40 mx-auto object-contain"
+      />
+
+      <h2 className="mt-4 font-semibold">
+        {product.title}
+      </h2>
+
+      <p className="mt-2 font-bold">
+        R$ {product.price}
+      </p>
+    </div>
+    </Link>
+    ))}
+
     </div>
   )
 }
