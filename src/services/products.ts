@@ -14,3 +14,18 @@ export async function getAllProducts(): Promise<Product[]> {
  return data
  
 }
+
+
+
+export async function getProdutoPorId(id: string): Promise<Product> {
+  const response = await fetch(`${API_URL}/${id}`)
+
+  if (!response.ok) {
+    throw new Error('Erro ao buscar produto')
+  }
+
+  const data = (await response.json()) as Product
+
+  return data
+}
+
