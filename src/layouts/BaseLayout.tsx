@@ -1,18 +1,14 @@
-import type { ReactNode } from 'react'
+import { Outlet } from 'react-router-dom'
 import { Header } from '../components/Header'
 import { Footer } from '../components/Footer'
 
-interface BaseLayoutProps {
-  children: ReactNode
-}
-
-export function BaseLayout({ children }: BaseLayoutProps) {
+export function BaseLayout() {
   return (
     <>
       <Header />
 
       <main>
-        {children}
+        <Outlet />
       </main>
 
       <Footer />
