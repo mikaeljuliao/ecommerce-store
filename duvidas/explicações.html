@@ -2186,3 +2186,407 @@ FIM DA ANOTAÇÃO
 
 
 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+====================================================================
+ANOTAÇÃO COMPLETA — FEATURE BASE DE DADOS LOCAL + UI/UX FIRST
+====================================================================
+
+Essa feature mudou COMPLETAMENTE a base do projeto.
+
+Saímos de:
+- API externa (FakeStore)
+- dados em inglês
+- produtos aleatórios
+- lógica antes do visual
+
+Para:
+- Banco de dados local (JSON)
+- produtos em PT-BR
+- categorias reais
+- foco em UI/UX primeiro
+- arquitetura clara e profissional
+
+====================================================================
+1️⃣ POR QUE CRIAMOS UM BANCO DE DADOS LOCAL (JSON)
+====================================================================
+
+Decisão de arquitetura:
+
+❌ API externa:
+- dados fora do meu controle
+- títulos e descrições em inglês
+- produtos sem contexto
+- dependência externa
+
+✅ JSON local:
+- total controle dos dados
+- produtos realistas
+- fácil de trocar no futuro
+- qualquer pessoa pode usar o projeto
+  → basta trocar o JSON
+
+O JSON NÃO é lógica.
+Ele é apenas DADOS.
+
+====================================================================
+2️⃣ ESTRUTURA DO JSON (VISÃO GERAL)
+====================================================================
+
+O JSON segue esta ideia:
+
+BancoDeProdutos
+ └─ categorias[]
+     └─ categoria
+         ├─ slug
+         ├─ nome
+         └─ produtos[]
+             └─ produto
+                 ├─ id
+                 ├─ titulo
+                 ├─ descricao
+                 ├─ preco
+                 ├─ preco_desconto
+                 ├─ imagens[]
+                 └─ categoria
+
+O JSON NÃO valida nada.
+Quem valida é o TypeScript.
+
+====================================================================
+3️⃣ INTERFACES (TYPESCRIPT) — O MOLDE DOS DADOS
+====================================================================
+
+IMPORTANTE:
+Interface ≠ dados reais  
+Interface = REGRA / MOLDE / CONTRATO
+
+Ela diz:
+"Se você quiser usar esse dado, ele PRECISA ter essa forma."
+
+-----------------------------------------------------
+📄 Product.ts
+-----------------------------------------------------
+
+export interface Product {
+  id: number
+  titulo: string
+  descricao: string
+  preco: number
+  preco_desconto: number | null
+  imagens: string[]
+  categoria: string
+}
+
+Aqui definimos:
+- o que é um produto
+- quais campos ele tem
+- quais são obrigatórios
+- quais podem ser null
+
+O `| null` significa:
+→ Union Type
+→ pode ser number OU null
+
+-----------------------------------------------------
+📄 Categoria.ts
+-----------------------------------------------------
+
+import type { Product } from './Product'
+
+export interface Categoria {
+  slug: string
+  nome: string
+  produtos: Product[]
+}
+
+Aqui acontece algo importante:
+
+- Categoria NÃO inventa produto
+- Ela IMPORTA o modelo Product
+- produtos é um ARRAY de Product
+
+Ou seja:
+Cada item dentro de produtos PRECISA seguir
+o formato definido em Product.ts
+
+-----------------------------------------------------
+📄 BancoDeProdutos.ts
+-----------------------------------------------------
+
+import type { Categoria } from './Categoria'
+
+export interface BancoDeProdutos {
+  categorias: Categoria[]
+}
+
+Isso representa o JSON inteiro.
+
+Não é um banco real.
+É apenas o MOLDE do banco.
+
+====================================================================
+4️⃣ SERVICES — A CAMADA DE ACESSO AOS DADOS
+====================================================================
+
+O service serve para:
+- isolar lógica
+- evitar acessar o JSON direto nas páginas
+- facilitar troca futura (JSON → API)
+
+-----------------------------------------------------
+📄 services/products.ts
+-----------------------------------------------------
+
+import produtosJson from '../data/produtos.json'
+import type { BancoDeProdutos } from '../types/BancoDeProdutos'
+import type { Categoria } from '../types/Categoria'
+import type { Product } from '../types/Product'
+
+const bancoDeProdutos = produtosJson as BancoDeProdutos
+
+Aqui acontece uma COISA MUITO IMPORTANTE:
+
+- produtosJson vem do JSON (JavaScript puro)
+- TypeScript NÃO sabe o formato disso
+- usamos `as BancoDeProdutos` para dizer:
+
+"CONFIA, esse JSON segue esse modelo"
+
+Isso é:
+→ Type Assertion (afirmação de tipo)
+
+-----------------------------------------------------
+🔹 getCategorias
+-----------------------------------------------------
+
+export function getCategorias(): Categoria[] {
+  return bancoDeProdutos.categorias
+}
+
+Essa função:
+- retorna TODAS as categorias
+- já tipadas corretamente
+- sem lógica complexa
+
+É usada na Home.
+
+-----------------------------------------------------
+🔹 getProdutosPorCategoria
+-----------------------------------------------------
+
+export function getProdutosPorCategoria(slug: string): Product[] {
+  const categoria = bancoDeProdutos.categorias.find(
+    (cat) => cat.slug === slug
+  )
+
+  return categoria ? categoria.produtos : []
+}
+
+Aqui acontece:
+
+1) Recebo um slug (string)
+2) Procuro uma categoria com esse slug
+3) Se existir:
+   → retorno os produtos dela
+4) Se não existir:
+   → retorno array vazio
+
+Por que array vazio?
+Porque evita erro no map().
+
+-----------------------------------------------------
+🔹 getProdutoPorId
+-----------------------------------------------------
+
+export function getProdutoPorId(id: number): Product | undefined {
+  for (const categoria of bancoDeProdutos.categorias) {
+    const produto = categoria.produtos.find(
+      (produto) => produto.id === id
+    )
+
+    if (produto) return produto
+  }
+
+  return undefined
+}
+
+Essa função:
+- percorre TODAS as categorias
+- procura o produto pelo id
+- retorna o produto se achar
+- retorna undefined se não achar
+
+Isso simula um banco real.
+
+====================================================================
+5️⃣ ROTAS — App.tsx
+====================================================================
+
+<BrowserRouter>
+  <BaseLayout>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/produto/:id" element={<Product />} />
+      <Route path="/carrinho" element={<Cart />} />
+    </Routes>
+  </BaseLayout>
+</BrowserRouter>
+
+Importante:
+
+- BaseLayout envolve tudo
+- Header e Footer são fixos
+- apenas o conteúdo central muda
+
+A rota /produto/:id é dinâmica.
+Exemplo:
+- /produto/3
+- /produto/10
+
+====================================================================
+6️⃣ HOME — EXIBINDO CATEGORIAS E PRODUTOS
+====================================================================
+
+Na Home:
+
+- chamamos getCategorias()
+- fazemos map nas categorias
+- dentro de cada categoria:
+  - exibimos os produtos
+  - usamos Link para navegar
+
+Exemplo:
+
+<Link to={`/produto/${produto.id}`}>
+
+Isso conecta Home → Product.
+
+====================================================================
+7️⃣ PRODUCT — PÁGINA DE PRODUTO
+====================================================================
+
+A página Product é uma página DINÂMICA.
+
+-----------------------------------------------------
+🔹 useParams
+-----------------------------------------------------
+
+const { id } = useParams<{ id: string }>()
+
+Isso significa:
+- a URL tem /produto/:id
+- id SEMPRE vem como string
+- mesmo sendo número no JSON
+
+-----------------------------------------------------
+🔹 Conversão de ID
+-----------------------------------------------------
+
+const productId = Number(id)
+
+Por quê?
+Porque no JSON o id é number.
+
+Depois validamos:
+- se é NaN
+- se existe produto
+
+-----------------------------------------------------
+🔹 Estados
+-----------------------------------------------------
+
+const [product, setProduct] = useState<Product | null>(null)
+const [loading, setLoading] = useState(true)
+const [error, setError] = useState<string | null>(null)
+
+Isso controla:
+- carregamento
+- erro
+- produto encontrado
+
+-----------------------------------------------------
+🔹 Lógica do useEffect
+-----------------------------------------------------
+
+1) Verifica se existe id
+2) Converte id para number
+3) Busca produto no service
+4) Se não existir → erro
+5) Se existir → seta produto
+6) Finaliza loading
+
+-----------------------------------------------------
+🔹 Render condicional
+-----------------------------------------------------
+
+if (loading) → mostra loading
+if (error) → mostra erro
+if (!product) → produto não encontrado
+
+Isso evita:
+- acessar dados inexistentes
+- erros de runtime
+
+====================================================================
+8️⃣ UI/UX — DECISÃO DE DESIGN
+====================================================================
+
+Prioridade agora:
+- layout profissional
+- visual antes da lógica pesada
+- experiência clara
+
+Decisões:
+- cards com imagem centralizada
+- preço com desconto destacado
+- hover suave
+- grid responsivo
+- hero introdutório
+- categorias separadas
+
+====================================================================
+9️⃣ REGRA DE OURO DESSA FEATURE
+====================================================================
+
+- JSON = dados
+- Interfaces = regras
+- Service = lógica
+- Pages = renderização
+- Router = navegação
+- UI vem ANTES da lógica pesada
+
+====================================================================
+🔚 CONCLUSÃO
+====================================================================
+
+Essa feature:
+- organizou o projeto
+- deixou escalável
+- deixou profissional
+- facilitou aprendizado
+- preparou o terreno para:
+  → carrinho
+  → categorias
+  → recomendados
+  → filtros
+  → backend real no futuro
+
+Se no futuro eu estiver perdido, lembrar:
+"Primeiro estrutura, depois lógica, depois refinamento."
+
+-->

@@ -1,31 +1,30 @@
+import produtosJson from '../data/produtos.json'
+import type { BancoDeProdutos } from '../types/BancoDeProdutos'
+import type { Categoria } from '../types/Categoria'
 import type { Product } from '../types/Product'
 
-const API_URL = 'https://fakestoreapi.com/products'
+const bancoDeProdutos = produtosJson as BancoDeProdutos
 
-export async function getAllProducts(): Promise<Product[]> {
-
- const response = await fetch(API_URL)
-
-  if (!response.ok){
-    throw new Error('Erro ao buscar produtos')
-  }
- const data = (await response.json()) as Product[]
-
- return data
- 
+export function getCategorias(): Categoria[] {
+  return bancoDeProdutos.categorias
 }
 
+export function getProdutosPorCategoria(slug: string): Product[] {
+  const categoria = bancoDeProdutos.categorias.find(
+    (cat) => cat.slug === slug
+  )
 
-
-export async function getProdutoPorId(id: string): Promise<Product> {
-  const response = await fetch(`${API_URL}/${id}`)
-
-  if (!response.ok) {
-    throw new Error('Erro ao buscar produto')
-  }
-
-  const data = (await response.json()) as Product
-
-  return data
+  return categoria ? categoria.produtos : []
 }
 
+export function getProdutoPorId(id: number): Product | undefined {
+  for (const categoria of bancoDeProdutos.categorias) {
+    const produto = categoria.produtos.find(
+      (produto) => produto.id === id
+    )
+
+    if (produto) return produto
+  }
+
+  return undefined
+}
