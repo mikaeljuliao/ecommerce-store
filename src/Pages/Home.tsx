@@ -1,11 +1,11 @@
 import { Link } from 'react-router-dom'
-import { getCategorias } from "../services/products"
+import { getCategorias } from '../services/products'
 
 export default function Home() {
   const categorias = getCategorias()
 
   return (
-    <main className="bg-zinc-950 min-h-screen text-white">
+    <section className="bg-zinc-950 min-h-screen text-white">
       <div className="max-w-7xl mx-auto px-6 py-10">
 
         {/* HERO / INTRODUÇÃO */}
@@ -43,10 +43,10 @@ export default function Home() {
                 <Link
                   key={produto.id}
                   to={`/produto/${produto.id}`}
-                  className="bg-zinc-900 rounded-xl border border-zinc-800 hover:border-zinc-600 transition-all duration-200 overflow-hidden group cursor-pointer"
+                  className="bg-zinc-900 rounded-xl border border-zinc-800 hover:border-zinc-600 transition-all duration-200 overflow-hidden group"
                 >
 
-                  {/* ÁREA DA IMAGEM */}
+                  {/* IMAGEM */}
                   <div className="aspect-square bg-white flex items-center justify-center p-4">
                     <img
                       src={produto.imagens[0]}
@@ -55,7 +55,7 @@ export default function Home() {
                     />
                   </div>
 
-                  {/* INFO DO PRODUTO */}
+                  {/* INFO */}
                   <div className="p-4 flex flex-col justify-between h-[140px]">
                     <h3 className="text-sm font-medium leading-snug line-clamp-2">
                       {produto.titulo}
@@ -86,6 +86,6 @@ export default function Home() {
           </section>
         ))}
       </div>
-    </main>
+    </section>
   )
 }
