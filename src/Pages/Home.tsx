@@ -24,7 +24,7 @@ export default function Home() {
 
         {/* CATEGORIAS */}
         {categorias.map((categoria) => (
-          <section key={categoria.slug} className="mb-16">
+          <section key={categoria.slug} id={categoria.slug} className="mb-16">
 
             {/* TÍTULO DA CATEGORIA */}
             <div className="flex items-center justify-between mb-6">
