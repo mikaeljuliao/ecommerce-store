@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { getCategorias } from '../services/products'
+import { Hero } from '../components/Hero'
 
 export default function Home() {
   const categorias = getCategorias()
@@ -13,40 +14,23 @@ export default function Home() {
         transition-colors duration-300
       "
     >
-      <div className="max-w-7xl mx-auto px-6 py-10">
+      <div className="max-w-full mx-auto ">
 
-        {/* HERO / INTRODUÇÃO */}
-        <section
-          id="home"
-          className="mb-14 scroll-mt-24"
-        >
-          <div
-            className="
-              rounded-2xl p-10 flex flex-col gap-4
-              bg-[rgb(var(--bg-secondary))]
-              border border-[rgb(var(--border))]
-            "
-          >
-            <h1 className="text-3xl md:text-4xl font-bold text-[rgb(var(--primary))]">
-              Monte seu setup ideal
-            </h1>
-
-            <p className="max-w-2xl text-[rgb(var(--text-muted))]">
-              Produtos gamers, tecnologia e itens para setup selecionados para quem
-              busca performance, conforto e estilo.
-            </p>
-          </div>
+        {/* HERO PRINCIPAL (novo, visual forte) */}
+        <section className="mb-20">
+          <Hero />
         </section>
+
 
         {/* CATEGORIAS */}
         {categorias.map((categoria) => (
           <section
             key={categoria.slug}
             id={categoria.slug}
-            className="mb-16 scroll-mt-24 animate-fade-up"
+            className="mb-16 scroll-mt-24 animate-fade-up max-w-7xl px-10  "
           >
             {/* TÍTULO */}
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center justify-between mb-6" >
               <h2 className="text-2xl font-semibold text-[rgb(var(--primary))]">
                 {categoria.nome}
               </h2>
