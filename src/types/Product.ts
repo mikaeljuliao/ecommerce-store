@@ -1,4 +1,4 @@
-export interface Product {
+export type Product = {
   id: number
   titulo: string
   descricao: string
@@ -6,4 +6,8 @@ export interface Product {
   preco_desconto: number | null
   imagens: string[]
   categoria: string
+
+  // 🔥 exatamente como no JSON
+  em_promocao: boolean
+  mais_vendido: boolean
 }

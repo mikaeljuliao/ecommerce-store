@@ -315,3 +315,258 @@ function toggleTheme() {
 
 
 -->
+
+
+
+
+
+
+<!--
+DATA:
+27/01/2026
+-->
+
+
+<!--
+==================== APRENDIZADO COMPLETO ====================
+
+TEMA:
+Carrossel de produtos com botões inteligentes (← →)
+que aparecem e somem automaticamente conforme o scroll.
+
+=============================================================
+OBJETIVO GERAL
+=============================================================
+
+Criar uma lista horizontal de produtos (tipo carrossel),
+sem usar bibliotecas externas,
+onde o usuário navega APENAS por botões.
+
+Regras do comportamento:
+- O botão da esquerda (voltar) SÓ aparece se NÃO estiver no primeiro produto
+- O botão da direita (avançar) SÓ aparece se AINDA houver produtos à frente
+- Ao chegar no último produto, o botão da direita SOME
+- Ao voltar para o início, o botão da esquerda SOME
+- O scroll manual (mouse/trackpad) é desativado
+- Apenas os botões controlam a navegação
+- Os cards continuam clicáveis normalmente
+
+Isso gera uma UX limpa, profissional e igual a e-commerces reais.
+
+=============================================================
+IDEIA PRINCIPAL DO FUNCIONAMENTO
+=============================================================
+
+1) Os produtos ficam dentro de uma DIV horizontal (display: flex)
+2) Essa DIV possui um scroll horizontal interno
+3) Usamos useRef para acessar essa DIV no JavaScript
+4) Movemos o scroll usando scrollBy()
+5) Medimos a posição atual do scroll
+6) Com base nessa posição, decidimos se os botões aparecem ou não
+
+=============================================================
+ESTRUTURA VISUAL DO CARROSSEL (RESUMO)
+=============================================================
+
+[ BOTÃO ← ]  [ PRODUTO ][ PRODUTO ][ PRODUTO ]  [ BOTÃO → ]
+
+Os botões ficam fora da área que rola.
+A área dos produtos se move sozinha.
+
+=============================================================
+PASSO 1 — REFERÊNCIA DO ELEMENTO QUE VAI ROLAR
+=============================================================
+
+Usamos useRef para guardar a referência da DIV que contém os produtos.
+
+Código:
+const vendidosRef = useRef<HTMLDivElement | null>(null)
+
+Isso permite:
+- controlar o scroll
+- ler a posição atual
+- saber quando chegou no começo ou no fim
+
+=============================================================
+PASSO 2 — ESTADOS QUE CONTROLAM OS BOTÕES
+=============================================================
+
+Criamos dois estados:
+- canScrollLeft  → controla o botão de voltar
+- canScrollRight → controla o botão de avançar
+
+Código:
+const [canScrollLeft, setCanScrollLeft] = useState(false)
+const [canScrollRight, setCanScrollRight] = useState(true)
+
+Eles começam assim porque:
+- inicialmente estamos no começo (não pode voltar)
+- ainda existem produtos à direita
+
+=============================================================
+PASSO 3 — ENTENDENDO OS VALORES DO SCROLL
+=============================================================
+
+Todo elemento com scroll possui 3 valores importantes:
+
+- scrollLeft:
+  Quanto já foi rolado para a direita
+
+- clientWidth:
+  Largura visível da área (o que o usuário vê)
+
+- scrollWidth:
+  Largura TOTAL do conteúdo (todos os produtos juntos)
+
+Com esses três valores conseguimos saber:
+✔️ se ainda há produtos escondidos
+✔️ se chegamos no começo
+✔️ se chegamos no fim
+
+=============================================================
+PASSO 4 — FUNÇÃO QUE DECIDE SE OS BOTÕES APARECEM
+=============================================================
+
+Essa é a FUNÇÃO MAIS IMPORTANTE de toda a lógica.
+
+Ela analisa a posição atual do scroll
+e atualiza os estados dos botões.
+
+Código:
+
+function updateScrollButtons(ref: HTMLDivElement | null) {
+  if (!ref) return
+
+  const { scrollLeft, scrollWidth, clientWidth } = ref
+
+  // Se já andou um pouco, pode voltar
+  setCanScrollLeft(scrollLeft > 0)
+
+  // Se ainda não chegou no final, pode avançar
+  setCanScrollRight(
+    scrollLeft + clientWidth < scrollWidth - 5
+  )
+}
+
+O "-5" é uma margem de segurança
+para evitar erros de arredondamento.
+
+=============================================================
+PASSO 5 — FUNÇÃO PARA AVANÇAR OS PRODUTOS (→)
+=============================================================
+
+Quando o usuário clica no botão da direita,
+movemos o scroll para frente.
+
+Código:
+
+function scrollNext(ref: HTMLDivElement | null) {
+  if (!ref) return
+
+  ref.scrollBy({
+    left: 240,          // quantidade que avança
+    behavior: 'smooth'  // animação suave
+  })
+
+  // Atualiza os botões após o movimento
+  setTimeout(() => updateScrollButtons(ref), 300)
+}
+
+=============================================================
+PASSO 6 — FUNÇÃO PARA VOLTAR OS PRODUTOS (←)
+=============================================================
+
+Mesma lógica, mas voltando.
+
+Código:
+
+function scrollPrev(ref: HTMLDivElement | null) {
+  if (!ref) return
+
+  ref.scrollBy({
+    left: -240,         // valor negativo = volta
+    behavior: 'smooth'
+  })
+
+  setTimeout(() => updateScrollButtons(ref), 300)
+}
+
+=============================================================
+PASSO 7 — ATUALIZAR AO SCROLL (SEGURANÇA EXTRA)
+=============================================================
+
+Se por algum motivo o scroll mudar,
+atualizamos os botões.
+
+Código:
+
+function handleScroll() {
+  updateScrollButtons(vendidosRef.current)
+}
+
+E usamos assim na DIV:
+onScroll={handleScroll}
+
+=============================================================
+PASSO 8 — DESATIVAR SCROLL MANUAL E MANTER CLIQUES
+=============================================================
+
+Desativamos o scroll manual do mouse,
+forçando o uso dos botões.
+
+Mas os cards continuam clicáveis.
+
+Código:
+
+DIV DO CARROSSEL:
+className="pointer-events-none"
+
+CARD:
+className="pointer-events-auto"
+
+=============================================================
+PASSO 9 — MOSTRAR OU ESCONDER OS BOTÕES
+=============================================================
+
+Os botões só aparecem se o estado permitir.
+
+Exemplo:
+
+{canScrollLeft && (
+  <button onClick={() => scrollPrev(vendidosRef.current)}>
+    ←
+  </button>
+)}
+
+{canScrollRight && (
+  <button onClick={() => scrollNext(vendidosRef.current)}>
+    →
+  </button>
+)}
+
+=============================================================
+RESULTADO FINAL
+=============================================================
+
+✔️ Carrossel funcional sem bibliotecas
+✔️ Botões aparecem e somem automaticamente
+✔️ UX limpa e profissional
+✔️ Fácil de reaproveitar
+✔️ Código organizado e compreensível
+✔️ Ideal para e-commerce e portfólio
+
+=============================================================
+COMO REPLICAR EM QUALQUER PROJETO
+=============================================================
+
+1) Criar uma lista horizontal (flex)
+2) Usar useRef para acessar o elemento
+3) Criar funções de scroll (scrollBy)
+4) Medir scrollLeft, clientWidth e scrollWidth
+5) Controlar botões com useState
+6) Mostrar ou esconder botões dinamicamente
+
+=============================================================
+FIM DO APRENDIZADO
+=============================================================
+-->
