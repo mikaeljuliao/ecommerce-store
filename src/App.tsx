@@ -5,6 +5,8 @@ import { BaseLayout } from './layouts/BaseLayout'
 import Home from './Pages/Home'
 import Product from './Pages/Product'
 import Cart from './Pages/Cart'
+import { Category } from './Pages/Category'
+
 
 type Theme = 'light' | 'dark'
 
@@ -61,6 +63,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/produto/:id" element={<Product />} />
           <Route path="/carrinho" element={<Cart />} />
+          <Route path="/categoria/:slug" element={<Category />} />
+
         </Route>
       </Routes>
     </BrowserRouter>

@@ -10,13 +10,15 @@
           "descricao": "Teclado mecânico com switches de alta precisão, iluminação RGB personalizável e estrutura reforçada para longas sessões de jogo.",
           "preco": 499.90,
           "preco_desconto": 399.90,
+          "em_promocao": true,
+          "mais_vendido": true,
           "imagens": [
-          "/imagem/gamers/Teclado-Mecânico-Gamer-Switch.jpg",
-          "/imagem/gamers/Teclado-Mecânico-Gamer-Switch-2.jpg",
-          "/imagem/gamers/Teclado-Mecânico-Gamer-Switch-3.jpg",
-          "/imagem/gamers/Teclado-Mecânico-Gamer-Switch-4.jpg",
-          "/imagem/gamers/Teclado-Mecânico-Gamer-Switch-5.jpg",
-          "/imagem/gamers/Teclado-Mecânico-Gamer-Switch-6.jpg"
+            "/imagem/gamers/Teclado-Mecânico-Gamer-Switch.jpg",
+            "/imagem/gamers/Teclado-Mecânico-Gamer-Switch-2.jpg",
+            "/imagem/gamers/Teclado-Mecânico-Gamer-Switch-3.jpg",
+            "/imagem/gamers/Teclado-Mecânico-Gamer-Switch-4.jpg",
+            "/imagem/gamers/Teclado-Mecânico-Gamer-Switch-5.jpg",
+            "/imagem/gamers/Teclado-Mecânico-Gamer-Switch-6.jpg"
           ],
           "categoria": "gamers"
         },
@@ -26,18 +28,19 @@
           "descricao": "Mouse gamer ergonômico com sensor de alta precisão, ideal para jogos competitivos e performance extrema.",
           "preco": 299.90,
           "preco_desconto": 249.90,
+          "em_promocao": true,
+          "mais_vendido": true,
           "imagens": [
-          "/imagem/gamers/Mouse-Gamer-Redragon-Cobra-Pro-RGB.jpg",
-          "/imagem/gamers/Mouse-Gamer-Redragon-Cobra-Pro-RGB-1.jpg",
-          "/imagem/gamers/Mouse-Gamer-Redragon-Cobra-Pro-RGB-2.jpg",
-          "/imagem/gamers/Mouse-Gamer-Redragon-Cobra-Pro-RGB-3.jpg",
-          "/imagem/gamers/Mouse-Gamer-Redragon-Cobra-Pro-RGB-4.jpg"
+            "/imagem/gamers/Mouse-Gamer-Redragon-Cobra-Pro-RGB.jpg",
+            "/imagem/gamers/Mouse-Gamer-Redragon-Cobra-Pro-RGB-1.jpg",
+            "/imagem/gamers/Mouse-Gamer-Redragon-Cobra-Pro-RGB-2.jpg",
+            "/imagem/gamers/Mouse-Gamer-Redragon-Cobra-Pro-RGB-3.jpg",
+            "/imagem/gamers/Mouse-Gamer-Redragon-Cobra-Pro-RGB-4.jpg"
           ],
           "categoria": "gamers"
         }
       ]
     },
-
     {
       "slug": "tecnologia",
       "nome": "Tecnologia",
@@ -48,13 +51,15 @@
           "descricao": "Relógio inteligente com monitoramento cardíaco, sono, atividades físicas e integração total com smartphone.",
           "preco": 899.90,
           "preco_desconto": 799.90,
+          "em_promocao": true,
+          "mais_vendido": true,
           "imagens": [
-          "/imagem/tecnologia/Smartwatch-Relógio-Inteligente.jpg",
-          "/imagem/tecnologia/Smartwatch-Relógio-Inteligente-1.jpg",
-          "/imagem/tecnologia/Smartwatch-Relógio-Inteligente-2.jpg",
-          "/imagem/tecnologia/Smartwatch-Relógio-Inteligente-3.jpg",
-          "/imagem/tecnologia/Smartwatch-Relógio-Inteligente-4.jpg",
-          "/imagem/tecnologia/Smartwatch-Relógio-Inteligente-5.jpg"
+            "/imagem/tecnologia/Smartwatch-Relógio-Inteligente.jpg",
+            "/imagem/tecnologia/Smartwatch-Relógio-Inteligente-1.jpg",
+            "/imagem/tecnologia/Smartwatch-Relógio-Inteligente-2.jpg",
+            "/imagem/tecnologia/Smartwatch-Relógio-Inteligente-3.jpg",
+            "/imagem/tecnologia/Smartwatch-Relógio-Inteligente-4.jpg",
+            "/imagem/tecnologia/Smartwatch-Relógio-Inteligente-5.jpg"
           ],
           "categoria": "tecnologia"
         },
@@ -64,20 +69,21 @@
           "descricao": "Fone sem fio com cancelamento ativo de ruído, bateria de longa duração e som de alta fidelidade.",
           "preco": 699.90,
           "preco_desconto": 599.90,
-         "imagens": [
-          "/imagem/tecnologia/Fone-de-Ouvido-Stage-Hero6.jpg",
-          "/imagem/tecnologia/Fone-de-Ouvido-Stage-Hero6-1.jpg",
-          "/imagem/tecnologia/Fone-de-Ouvido-Stage-Hero6-2.jpg",
-          "/imagem/tecnologia/Fone-de-Ouvido-Stage-Hero6-3.jpg",
-          "/imagem/tecnologia/Fone-de-Ouvido-Stage-Hero6-4.jpg",
-          "/imagem/tecnologia/Fone-de-Ouvido-Stage-Hero6-5.jpg",
-          "/imagem/tecnologia/Fone-de-Ouvido-Stage-Hero6-6.jpg"
+          "em_promocao": true,
+          "mais_vendido": false,
+          "imagens": [
+            "/imagem/tecnologia/Fone-de-Ouvido-Stage-Hero6.jpg",
+            "/imagem/tecnologia/Fone-de-Ouvido-Stage-Hero6-1.jpg",
+            "/imagem/tecnologia/Fone-de-Ouvido-Stage-Hero6-2.jpg",
+            "/imagem/tecnologia/Fone-de-Ouvido-Stage-Hero6-3.jpg",
+            "/imagem/tecnologia/Fone-de-Ouvido-Stage-Hero6-4.jpg",
+            "/imagem/tecnologia/Fone-de-Ouvido-Stage-Hero6-5.jpg",
+            "/imagem/tecnologia/Fone-de-Ouvido-Stage-Hero6-6.jpg"
           ],
           "categoria": "tecnologia"
         }
       ]
     },
-
     {
       "slug": "setup",
       "nome": "Setup & Escritório",
@@ -88,13 +94,15 @@
           "descricao": "Suporte ajustável para monitor com braço articulado, ideal para ergonomia e organização do setup.",
           "preco": 349.90,
           "preco_desconto": 299.90,
-           "imagens": [
-          "/imagem/setup/SUPORTE-ARTICULADO-PARA-2-MONITORES.jpg",
-           "/imagem/setup/SUPORTE-ARTICULADO-PARA-2-MONITORES-1.jpg",
-           "/imagem/setup/SUPORTE-ARTICULADO-PARA-2-MONITORES-2.jpg",
-           "/imagem/setup/SUPORTE-ARTICULADO-PARA-2-MONITORES-3.jpg",
-           "/imagem/setup/SUPORTE-ARTICULADO-PARA-2-MONITORES-4.jpg",
-           "/imagem/setup/SUPORTE-ARTICULADO-PARA-2-MONITORES-5.jpg"
+          "em_promocao": true,
+          "mais_vendido": false,
+          "imagens": [
+            "/imagem/setup/SUPORTE-ARTICULADO-PARA-2-MONITORES.jpg",
+            "/imagem/setup/SUPORTE-ARTICULADO-PARA-2-MONITORES-1.jpg",
+            "/imagem/setup/SUPORTE-ARTICULADO-PARA-2-MONITORES-2.jpg",
+            "/imagem/setup/SUPORTE-ARTICULADO-PARA-2-MONITORES-3.jpg",
+            "/imagem/setup/SUPORTE-ARTICULADO-PARA-2-MONITORES-4.jpg",
+            "/imagem/setup/SUPORTE-ARTICULADO-PARA-2-MONITORES-5.jpg"
           ],
           "categoria": "setup"
         },
@@ -104,11 +112,13 @@
           "descricao": "Mesa em formato L com amplo espaço, acabamento premium e design moderno para setups completos.",
           "preco": 1299.90,
           "preco_desconto": null,
-           "imagens": [
-          "/imagem/setup/Mesa-Em-L-Estilo-Industrial.jpg",
-           "/imagem/setup/Mesa-Em-L-Estilo-Industrial-1.jpg",
-           "/imagem/setup/Mesa-Em-L-Estilo-Industrial-2.jpg",
-           "/imagem/setup/Mesa-Em-L-Estilo-Industrial-3.jpg"
+          "em_promocao": false,
+          "mais_vendido": true,
+          "imagens": [
+            "/imagem/setup/Mesa-Em-L-Estilo-Industrial.jpg",
+            "/imagem/setup/Mesa-Em-L-Estilo-Industrial-1.jpg",
+            "/imagem/setup/Mesa-Em-L-Estilo-Industrial-2.jpg",
+            "/imagem/setup/Mesa-Em-L-Estilo-Industrial-3.jpg"
           ],
           "categoria": "setup"
         }
