@@ -70,7 +70,7 @@
           "preco": 699.90,
           "preco_desconto": 599.90,
           "em_promocao": true,
-          "mais_vendido": false,
+          "mais_vendido": true,
           "imagens": [
             "/imagem/tecnologia/Fone-de-Ouvido-Stage-Hero6.jpg",
             "/imagem/tecnologia/Fone-de-Ouvido-Stage-Hero6-1.jpg",
@@ -95,7 +95,7 @@
           "preco": 349.90,
           "preco_desconto": 299.90,
           "em_promocao": true,
-          "mais_vendido": false,
+          "mais_vendido": true,
           "imagens": [
             "/imagem/setup/SUPORTE-ARTICULADO-PARA-2-MONITORES.jpg",
             "/imagem/setup/SUPORTE-ARTICULADO-PARA-2-MONITORES-1.jpg",

@@ -570,3 +570,201 @@ COMO REPLICAR EM QUALQUER PROJETO
 FIM DO APRENDIZADO
 =============================================================
 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+data: 29/01/2026
+
+
+
+
+
+
+
+
+
+
+
+
+{/*
+================================================================================
+🧠 CARROSSEL DE PRODUTOS SEM SCROLL (ESTILO MERCADO LIVRE / AMAZON)
+================================================================================
+
+OBJETIVO:
+- Fazer os produtos ocuparem TODA a largura disponível da tela
+- NÃO permitir scroll para baixo nem para o lado
+- Quando não couberem mais produtos:
+  → mostrar setas laterais (← →)
+  → trocar os produtos exibidos (como um carrossel)
+- Funcionar IGUAL no mobile e no desktop
+
+================================================================================
+1️⃣ ESTADOS PRINCIPAIS
+================================================================================
+
+const [itemsPerPage, setItemsPerPage] = useState(2)
+const [page, setPage] = useState(0)
+
+itemsPerPage:
+- Quantos produtos aparecem por "tela"
+- Mobile: 2
+- Desktop: 5
+
+page:
+- Página atual do carrossel
+- Começa sempre em 0
+
+================================================================================
+2️⃣ RESPONSIVIDADE (DEFINE QUANTOS PRODUTOS CABEM NA TELA)
+================================================================================
+
+useEffect(() => {
+  function handleResize() {
+    if (window.innerWidth >= 1024) {
+      setItemsPerPage(5) // desktop
+    } else {
+      setItemsPerPage(2) // mobile
+    }
+
+    // Sempre que muda o tamanho da tela,
+    // resetamos a página para evitar bugs
+    setPage(0)
+  }
+
+  handleResize()
+  window.addEventListener('resize', handleResize)
+
+  return () => window.removeEventListener('resize', handleResize)
+}, [])
+
+👉 Aqui NÃO existe scroll.
+👉 A tela define quantos produtos aparecem.
+
+================================================================================
+3️⃣ CÁLCULO DOS PRODUTOS VISÍVEIS (O CORAÇÃO DO CARROSSEL)
+================================================================================
+
+const startIndex = page * itemsPerPage
+const endIndex = startIndex + itemsPerPage
+
+const produtosVisiveis = produtos.slice(startIndex, endIndex)
+
+EXEMPLO:
+- page = 0
+- itemsPerPage = 2
+→ mostra produtos [0, 1]
+
+- page = 1
+→ mostra produtos [2, 3]
+
+👉 A tela NÃO se move.
+👉 Apenas os produtos mudam.
+
+================================================================================
+4️⃣ CONTROLE DAS SETAS (ESQUERDA / DIREITA)
+================================================================================
+
+const canGoPrev = page > 0
+const canGoNext = endIndex < produtos.length
+
+- Seta ESQUERDA aparece só se:
+  page > 0
+
+- Seta DIREITA aparece só se:
+  ainda existirem produtos escondidos
+
+================================================================================
+5️⃣ SETAS LATERAIS (UX DE CARROSSEL REAL)
+================================================================================
+
+{canGoPrev && (
+  <button
+    onClick={() => setPage(p => p - 1)}
+    className="
+      absolute left-0 top-1/2 -translate-y-1/2 z-10
+      p-2 rounded-full border
+      bg-[rgb(var(--bg-secondary))]
+    "
+  >
+    <ChevronLeft size={22} />
+  </button>
+)}
+
+{canGoNext && (
+  <button
+    onClick={() => setPage(p => p + 1)}
+    className="
+      absolute right-0 top-1/2 -translate-y-1/2 z-10
+      p-2 rounded-full border
+      bg-[rgb(var(--bg-secondary))]
+    "
+  >
+    <ChevronRight size={22} />
+  </button>
+)}
+
+👉 Setas simulam movimento lateral
+👉 NÃO existe botão grande embaixo
+👉 UX igual marketplace
+
+================================================================================
+6️⃣ GRID DE PRODUTOS (SEM SCROLL)
+================================================================================
+
+<div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+  {produtosVisiveis.map(produto => (
+    <Link key={produto.id} to={`/produto/${produto.id}`}>
+      ...
+    </Link>
+  ))}
+</div>
+
+- Mobile: 2 colunas
+- Desktop: 5 colunas
+- Sem overflow-x
+- Sem overflow-y
+
+================================================================================
+7️⃣ REGRA DE OURO DESSE PADRÃO
+================================================================================
+
+❌ NÃO usar scroll
+❌ NÃO usar overflow-auto
+❌ NÃO usar carrossel de biblioteca
+
+✔ Usar paginação manual
+✔ Usar slice()
+✔ Usar setas
+✔ Controlar tudo por estado
+
+================================================================================
+RESUMO FINAL (PRA MEMORIZAR):
+================================================================================
+
+"A TELA NÃO ANDA.
+QUEM ANDA SÃO OS PRODUTOS."
+
+================================================================================
+FIM DO COMENTÁRIO — COPIE E COLE SEM MEDO
+================================================================================
+*/}
+
+-->
+
+
