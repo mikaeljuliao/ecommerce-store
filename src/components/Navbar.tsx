@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { getCategorias } from '../services/products'
+import { useCart } from '../context/CartContext'
 
 type Theme = 'light' | 'dark'
 
@@ -12,6 +13,9 @@ interface NavbarProps {
 export function Navbar({ theme, setTheme }: NavbarProps) {
   const categorias = getCategorias()
   const [menuOpen, setMenuOpen] = useState(false)
+
+  // 🔹 TOTAL DE ITENS DO CARRINHO
+  const { totalItens } = useCart()
 
   function toggleTheme() {
     setTheme(prev => (prev === 'light' ? 'dark' : 'light'))
@@ -42,7 +46,6 @@ export function Navbar({ theme, setTheme }: NavbarProps) {
         {/* DESKTOP */}
         <nav className="hidden md:flex items-center gap-8 text-sm">
 
-          {/* HOME */}
           <a
             href="/#home"
             className="
@@ -102,9 +105,22 @@ export function Navbar({ theme, setTheme }: NavbarProps) {
             className="hidden md:block relative text-[rgb(var(--text-muted))] hover:text-[rgb(var(--text))] transition"
           >
             🛒
-            <span className="absolute -top-2 -right-2 bg-[rgb(var(--primary))] text-white text-xs w-5 h-5 flex items-center justify-center rounded-full animate-pulse">
-              0
-            </span>
+
+            {totalItens > 0 && (
+              <span
+                className="
+                  absolute -top-2 -right-2
+                  bg-[rgb(var(--primary))]
+                  text-white text-xs
+                  w-5 h-5
+                  flex items-center justify-center
+                  rounded-full
+                  animate-pulse
+                "
+              >
+                {totalItens}
+              </span>
+            )}
           </Link>
 
           {/* BOTÃO MOBILE */}
@@ -119,18 +135,32 @@ export function Navbar({ theme, setTheme }: NavbarProps) {
 
       {/* MENU MOBILE */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ${menuOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'}`}
+        className={`md:hidden overflow-hidden transition-all duration-300 ${
+          menuOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'
+        }`}
       >
         <div className="border-t shadow-lg px-6 py-6 flex flex-col gap-6 bg-[rgb(var(--bg-secondary))] border-[rgb(var(--border))]">
 
-          {/* LINKS */}
           <nav className="flex flex-col gap-4 text-base font-medium">
-            <a href="/#home" onClick={() => setMenuOpen(false)} className="hover:text-[rgb(var(--primary))] transition">
+            <a
+              href="/#home"
+              onClick={() => setMenuOpen(false)}
+              className="hover:text-[rgb(var(--primary))] transition"
+            >
               Home
             </a>
 
-            <Link to="/carrinho" onClick={() => setMenuOpen(false)} className="hover:text-[rgb(var(--primary))] transition">
+            <Link
+              to="/carrinho"
+              onClick={() => setMenuOpen(false)}
+              className="hover:text-[rgb(var(--primary))] transition"
+            >
               Carrinho
+              {totalItens > 0 && (
+                <span className="ml-2 text-xs font-bold text-[rgb(var(--primary))]">
+                  ({totalItens})
+                </span>
+              )}
             </Link>
           </nav>
 

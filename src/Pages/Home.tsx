@@ -1,70 +1,63 @@
 import { Link } from 'react-router-dom'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 import { getCategorias } from '../services/products'
 import { Hero } from '../components/Hero'
 import { CategoriesSection } from '../components/CategoriesSection'
+import { useCart } from '../context/CartContext'
 
 export default function Home() {
   const categorias = getCategorias()
+  const { adicionarProduto } = useCart()
 
-  // 🔹 junta todos os produtos
+  // 🔹 todos os produtos
   const todosProdutos = categorias.flatMap(
     (categoria) => categoria.produtos
   )
 
-  // 🔹 promoções (baseado no JSON)
-  const promocoes = todosProdutos.filter(
-    (produto) => produto.em_promocao
-  )
+  // 🔹 filtros
+  const promocoes = todosProdutos.filter(p => p.em_promocao)
+  const maisVendidos = todosProdutos.filter(p => p.mais_vendido)
 
-  // 🔹 mais vendidos (PODE TER PROMOÇÃO OU NÃO)
-  const maisVendidos = todosProdutos.filter(
-    (produto) => produto.mais_vendido
-  )
+  // 🔹 responsivo
+  const [itemsPerPage, setItemsPerPage] = useState(2)
 
-  // refs
-  const vendidosRef = useRef<HTMLDivElement | null>(null)
-
-  // estados dos botões
-  const [canScrollLeft, setCanScrollLeft] = useState(false)
-  const [canScrollRight, setCanScrollRight] = useState(false)
-
-  function updateScrollButtons(ref: HTMLDivElement | null) {
-    if (!ref) return
-
-    const { scrollLeft, scrollWidth, clientWidth } = ref
-
-    setCanScrollLeft(scrollLeft > 0)
-    setCanScrollRight(scrollLeft + clientWidth < scrollWidth - 5)
-  }
-
-  function scrollNext() {
-    if (!vendidosRef.current) return
-
-    vendidosRef.current.scrollBy({
-      left: 260,
-      behavior: 'smooth'
-    })
-
-    setTimeout(() => updateScrollButtons(vendidosRef.current), 300)
-  }
-
-  function scrollPrev() {
-    if (!vendidosRef.current) return
-
-    vendidosRef.current.scrollBy({
-      left: -260,
-      behavior: 'smooth'
-    })
-
-    setTimeout(() => updateScrollButtons(vendidosRef.current), 300)
-  }
+  // 🔹 páginas independentes
+  const [pageMaisVendidos, setPageMaisVendidos] = useState(0)
+  const [pagePromocoes, setPagePromocoes] = useState(0)
 
   useEffect(() => {
-    updateScrollButtons(vendidosRef.current)
+    function handleResize() {
+      if (window.innerWidth >= 1024) {
+        setItemsPerPage(5)
+      } else {
+        setItemsPerPage(2)
+      }
+      setPageMaisVendidos(0)
+      setPagePromocoes(0)
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
+
+  // 🔥 MAIS VENDIDOS
+  const startMV = pageMaisVendidos * itemsPerPage
+  const endMV = startMV + itemsPerPage
+
+  const maisVendidosVisiveis = maisVendidos.slice(startMV, endMV)
+  const canGoPrevMV = pageMaisVendidos > 0
+  const canGoNextMV = endMV < maisVendidos.length
+
+  // 💸 PROMOÇÕES
+  const startPromo = pagePromocoes * itemsPerPage
+  const endPromo = startPromo + itemsPerPage
+
+  const promocoesVisiveis = promocoes.slice(startPromo, endPromo)
+  const canGoPrevPromo = pagePromocoes > 0
+  const canGoNextPromo = endPromo < promocoes.length
 
   return (
     <section className="min-h-screen bg-[rgb(var(--bg))] text-[rgb(var(--text))]">
@@ -78,113 +71,157 @@ export default function Home() {
         {/* CATEGORIAS */}
         <CategoriesSection />
 
-        {/* MAIS VENDIDOS */}
-        <section className="mb-20 max-w-7xl mx-auto px-10">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-semibold">
-              🔥 Mais vendidos
-            </h2>
+        {/* 🔥 MAIS VENDIDOS */}
+        <section className="mb-20 max-w-7xl mx-auto px-4 relative">
+          <h2 className="text-2xl font-semibold mb-6">
+            🔥 Mais vendidos
+          </h2>
 
-            <div className="flex gap-2">
-              {canScrollLeft && (
-                <button
-                  onClick={scrollPrev}
-                  className="p-2 rounded-full border bg-[rgb(var(--bg-secondary))] border-[rgb(var(--border))] hover:border-[rgb(var(--primary))] transition"
-                >
-                  <ChevronLeft size={20} />
-                </button>
-              )}
+          {canGoPrevMV && (
+            <button
+              onClick={() => setPageMaisVendidos(p => p - 1)}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full border bg-[rgb(var(--bg-secondary))]"
+            >
+              <ChevronLeft size={22} />
+            </button>
+          )}
 
-              {canScrollRight && (
-                <button
-                  onClick={scrollNext}
-                  className="p-2 rounded-full border bg-[rgb(var(--bg-secondary))] border-[rgb(var(--border))] hover:border-[rgb(var(--primary))] transition"
-                >
-                  <ChevronRight size={20} />
-                </button>
-              )}
-            </div>
-          </div>
+          {canGoNextMV && (
+            <button
+              onClick={() => setPageMaisVendidos(p => p + 1)}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full border bg-[rgb(var(--bg-secondary))]"
+            >
+              <ChevronRight size={22} />
+            </button>
+          )}
 
-          <div
-            ref={vendidosRef}
-            onScroll={() => updateScrollButtons(vendidosRef.current)}
-            className="flex gap-4 overflow-hidden scroll-smooth"
-          >
-            {maisVendidos.map((produto) => (
-              <Link
-                key={produto.id}
-                to={`/produto/${produto.id}`}
-                className="min-w-[220px] rounded-xl border bg-[rgb(var(--bg-secondary))] border-[rgb(var(--border))] hover:border-[rgb(var(--primary))] transition"
-              >
-                <div className="aspect-square p-3 flex items-center justify-center">
-                  <img
-                    src={produto.imagens[0]}
-                    alt={produto.titulo}
-                    className="max-h-full object-contain"
-                  />
-                </div>
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+            {maisVendidosVisiveis.map(produto => (
+            <Link
+  key={produto.id}
+  to={`/produto/${produto.id}`}
+  className="rounded-xl border bg-[rgb(var(--bg-secondary))]"
+>
+  {/* IMAGEM — já é estável */}
+  <div className="aspect-square p-3 flex items-center justify-center">
+    <img
+      src={produto.imagens[0]}
+      alt={produto.titulo}
+      className="max-h-full object-contain"
+    />
+  </div>
 
-                <div className="p-3">
-                  <h3 className="text-sm line-clamp-2 mb-2">
-                    {produto.titulo}
-                  </h3>
+  {/* CONTEÚDO */}
+  <div className="p-3">
+    {/* TÍTULO — espaço fixo */}
+    <h3 className="text-sm line-clamp-2 min-h-[2.5rem] mb-2">
+      {produto.titulo}
+    </h3>
 
-                  {produto.em_promocao ? (
-                    <>
-                      <span className="text-xs line-through text-[rgb(var(--text-muted))] block">
-                        R$ {produto.preco.toFixed(2)}
-                      </span>
-                      <span className="font-semibold text-[rgb(var(--success))]">
-                        R$ {produto.preco_desconto!.toFixed(2)}
-                      </span>
-                    </>
-                  ) : (
-                    <span className="font-semibold text-[rgb(var(--success))]">
-                      R$ {produto.preco.toFixed(2)}
-                    </span>
-                  )}
-                </div>
-              </Link>
+    {/* PREÇO — espaço fixo independente de promoção */}
+    <div className="min-h-[2.25rem] mb-3">
+      {produto.em_promocao ? (
+        <>
+          <span className="text-xs line-through block text-gray-400">
+            R$ {produto.preco.toFixed(2)}
+          </span>
+          <span className="font-semibold text-green-600">
+            R$ {produto.preco_desconto!.toFixed(2)}
+          </span>
+        </>
+      ) : (
+        <span className="font-semibold text-green-600">
+          R$ {produto.preco.toFixed(2)}
+        </span>
+      )}
+    </div>
+
+    {/* BOTÃO — agora sempre alinhado */}
+    <button
+      onClick={(e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        adicionarProduto(produto, 1)
+      }}
+      className="w-full py-2 text-sm font-semibold rounded-lg bg-[rgb(var(--primary))] text-white"
+    >
+      Adicionar ao carrinho
+    </button>
+  </div>
+</Link>
+
             ))}
           </div>
         </section>
 
-        {/* PROMOÇÕES */}
-        <section className="mb-24 max-w-7xl mx-auto px-10">
+        {/* 💸 PROMOÇÕES */}
+        <section className="mb-24 max-w-7xl mx-auto px-4 relative">
           <h2 className="text-2xl font-semibold mb-6">
             💸 Promoções
           </h2>
 
-          <div className="flex gap-4 overflow-x-auto pb-2">
-            {promocoes.map((produto) => (
-              <Link
-                key={produto.id}
-                to={`/produto/${produto.id}`}
-                className="min-w-[220px] rounded-xl border bg-[rgb(var(--bg-secondary))] border-[rgb(var(--border))] hover:border-[rgb(var(--primary))] transition"
-              >
-                <div className="aspect-square p-3 flex items-center justify-center">
-                  <img
-                    src={produto.imagens[0]}
-                    alt={produto.titulo}
-                    className="max-h-full object-contain"
-                  />
-                </div>
+          {canGoPrevPromo && (
+            <button
+              onClick={() => setPagePromocoes(p => p - 1)}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full border bg-[rgb(var(--bg-secondary))]"
+            >
+              <ChevronLeft size={22} />
+            </button>
+          )}
 
-                <div className="p-3">
-                  <h3 className="text-sm line-clamp-2 mb-1">
-                    {produto.titulo}
-                  </h3>
+          {canGoNextPromo && (
+            <button
+              onClick={() => setPagePromocoes(p => p + 1)}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full border bg-[rgb(var(--bg-secondary))]"
+            >
+              <ChevronRight size={22} />
+            </button>
+          )}
 
-                  <span className="text-xs line-through text-[rgb(var(--text-muted))] block">
-                    R$ {produto.preco.toFixed(2)}
-                  </span>
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+            {promocoesVisiveis.map(produto => (
+             <Link
+  key={produto.id}
+  to={`/produto/${produto.id}`}
+  className="rounded-xl border bg-[rgb(var(--bg-secondary))]"
+>
+  {/* IMAGEM */}
+  <div className="aspect-square p-3 flex items-center justify-center">
+    <img
+      src={produto.imagens[0]}
+      alt={produto.titulo}
+      className="max-h-full object-contain"
+    />
+  </div>
 
-                  <span className="font-semibold text-[rgb(var(--success))]">
-                    R$ {produto.preco_desconto!.toFixed(2)}
-                  </span>
-                </div>
-              </Link>
+  {/* TEXTO COM ALTURA CONTROLADA */}
+  <div className="p-3">
+    <h3 className="text-sm line-clamp-2 min-h-[2.5rem] mb-1">
+      {produto.titulo}
+    </h3>
+
+    <div className="min-h-[1.5rem]">
+       <span className="text-xs line-through block text-gray-400">
+            R$ {produto.preco.toFixed(2)}
+          </span>
+          <span className="font-semibold text-green-600">
+            R$ {produto.preco_desconto!.toFixed(2)}
+          </span>
+    </div>
+
+    <button
+      onClick={(e) => {
+        e.preventDefault()
+        e.stopPropagation()
+        adicionarProduto(produto, 1)
+      }}
+      className="mt-3 w-full py-2 text-sm font-semibold rounded-lg bg-[rgb(var(--primary))] text-white"
+    >
+      Adicionar ao carrinho
+    </button>
+  </div>
+</Link>
+
             ))}
           </div>
         </section>

@@ -7,6 +7,7 @@ import Product from './Pages/Product'
 import Cart from './Pages/Cart'
 import { Category } from './Pages/Category'
 
+import { CartProvider } from './context/CartContext'
 
 type Theme = 'light' | 'dark'
 
@@ -50,24 +51,25 @@ function App() {
   }, [theme])
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          element={
-            <BaseLayout
-              theme={theme}
-              setTheme={setTheme}
-            />
-          }
-        >
-          <Route path="/" element={<Home />} />
-          <Route path="/produto/:id" element={<Product />} />
-          <Route path="/carrinho" element={<Cart />} />
-          <Route path="/categoria/:slug" element={<Category />} />
-
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <CartProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            element={
+              <BaseLayout
+                theme={theme}
+                setTheme={setTheme}
+              />
+            }
+          >
+            <Route path="/" element={<Home />} />
+            <Route path="/produto/:id" element={<Product />} />
+            <Route path="/carrinho" element={<Cart />} />
+            <Route path="/categoria/:slug" element={<Category />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </CartProvider>
   )
 }
 
