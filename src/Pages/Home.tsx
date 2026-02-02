@@ -7,6 +7,8 @@ import { Hero } from '../components/Hero'
 import { CategoriesSection } from '../components/CategoriesSection'
 import { VantagensDaLoja } from '../components/VantagensDaLoja'
 import { useCart } from '../context/CartContext'
+import { BlocoPromocional } from '../components/BlocoPromocional'
+
 
 export default function Home() {
   const categorias = getCategorias()
@@ -151,6 +153,9 @@ export default function Home() {
             ))}
           </div>
         </section>
+
+
+        <BlocoPromocional />
 
         {/* 💸 PROMOÇÕES */}
         <section className="mb-24 max-w-7xl mx-auto px-4 relative">

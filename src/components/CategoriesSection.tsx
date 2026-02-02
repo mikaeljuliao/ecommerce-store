@@ -5,7 +5,7 @@ export function CategoriesSection() {
   const categorias = getCategorias()
 
   return (
-    <section className="max-w-7xl mx-auto px-6 mb-24">
+    <section id='categorias' className="max-w-7xl mx-auto px-6 mb-24" >
       {/* TÍTULO CENTRALIZADO */}
       <div className="text-center mb-12">
         <h2 className="text-3xl font-semibold text-[rgb(var(--primary))]">
