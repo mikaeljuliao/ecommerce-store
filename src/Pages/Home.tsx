@@ -5,6 +5,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { getCategorias } from '../services/products'
 import { Hero } from '../components/Hero'
 import { CategoriesSection } from '../components/CategoriesSection'
+import { VantagensDaLoja } from '../components/VantagensDaLoja'
 import { useCart } from '../context/CartContext'
 
 export default function Home() {
@@ -64,9 +65,12 @@ export default function Home() {
       <div className="max-w-full mx-auto">
 
         {/* HERO */}
-        <section className="mb-20">
+        <section className="mb-16">
           <Hero />
         </section>
+
+        {/* ✅ VANTAGENS DA LOJA */}
+        <VantagensDaLoja />
 
         {/* CATEGORIAS */}
         <CategoriesSection />
@@ -97,59 +101,53 @@ export default function Home() {
 
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
             {maisVendidosVisiveis.map(produto => (
-            <Link
-  key={produto.id}
-  to={`/produto/${produto.id}`}
-  className="rounded-xl border bg-[rgb(var(--bg-secondary))]"
->
-  {/* IMAGEM — já é estável */}
-  <div className="aspect-square p-3 flex items-center justify-center">
-    <img
-      src={produto.imagens[0]}
-      alt={produto.titulo}
-      className="max-h-full object-contain"
-    />
-  </div>
+              <Link
+                key={produto.id}
+                to={`/produto/${produto.id}`}
+                className="rounded-xl border bg-[rgb(var(--bg-secondary))]"
+              >
+                <div className="aspect-square p-3 flex items-center justify-center">
+                  <img
+                    src={produto.imagens[0]}
+                    alt={produto.titulo}
+                    className="max-h-full object-contain"
+                  />
+                </div>
 
-  {/* CONTEÚDO */}
-  <div className="p-3">
-    {/* TÍTULO — espaço fixo */}
-    <h3 className="text-sm line-clamp-2 min-h-[2.5rem] mb-2">
-      {produto.titulo}
-    </h3>
+                <div className="p-3">
+                  <h3 className="text-sm line-clamp-2 min-h-[2.5rem] mb-2">
+                    {produto.titulo}
+                  </h3>
 
-    {/* PREÇO — espaço fixo independente de promoção */}
-    <div className="min-h-[2.25rem] mb-3">
-      {produto.em_promocao ? (
-        <>
-          <span className="text-xs line-through block text-gray-400">
-            R$ {produto.preco.toFixed(2)}
-          </span>
-          <span className="font-semibold text-green-600">
-            R$ {produto.preco_desconto!.toFixed(2)}
-          </span>
-        </>
-      ) : (
-        <span className="font-semibold text-green-600">
-          R$ {produto.preco.toFixed(2)}
-        </span>
-      )}
-    </div>
+                  <div className="min-h-[2.25rem] mb-3">
+                    {produto.em_promocao ? (
+                      <>
+                        <span className="text-xs line-through block text-gray-400">
+                          R$ {produto.preco.toFixed(2)}
+                        </span>
+                        <span className="font-semibold text-green-600">
+                          R$ {produto.preco_desconto!.toFixed(2)}
+                        </span>
+                      </>
+                    ) : (
+                      <span className="font-semibold text-green-600">
+                        R$ {produto.preco.toFixed(2)}
+                      </span>
+                    )}
+                  </div>
 
-    {/* BOTÃO — agora sempre alinhado */}
-    <button
-      onClick={(e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        adicionarProduto(produto, 1)
-      }}
-      className="w-full py-2 text-sm font-semibold rounded-lg bg-[rgb(var(--primary))] text-white"
-    >
-      Adicionar ao carrinho
-    </button>
-  </div>
-</Link>
-
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      adicionarProduto(produto, 1)
+                    }}
+                    className="w-full py-2 text-sm font-semibold rounded-lg bg-[rgb(var(--primary))] text-white"
+                  >
+                    Adicionar ao carrinho
+                  </button>
+                </div>
+              </Link>
             ))}
           </div>
         </section>
@@ -180,48 +178,45 @@ export default function Home() {
 
           <div className="grid grid-cols-2 lg:grid-cols-5 gap-4">
             {promocoesVisiveis.map(produto => (
-             <Link
-  key={produto.id}
-  to={`/produto/${produto.id}`}
-  className="rounded-xl border bg-[rgb(var(--bg-secondary))]"
->
-  {/* IMAGEM */}
-  <div className="aspect-square p-3 flex items-center justify-center">
-    <img
-      src={produto.imagens[0]}
-      alt={produto.titulo}
-      className="max-h-full object-contain"
-    />
-  </div>
+              <Link
+                key={produto.id}
+                to={`/produto/${produto.id}`}
+                className="rounded-xl border bg-[rgb(var(--bg-secondary))]"
+              >
+                <div className="aspect-square p-3 flex items-center justify-center">
+                  <img
+                    src={produto.imagens[0]}
+                    alt={produto.titulo}
+                    className="max-h-full object-contain"
+                  />
+                </div>
 
-  {/* TEXTO COM ALTURA CONTROLADA */}
-  <div className="p-3">
-    <h3 className="text-sm line-clamp-2 min-h-[2.5rem] mb-1">
-      {produto.titulo}
-    </h3>
+                <div className="p-3">
+                  <h3 className="text-sm line-clamp-2 min-h-[2.5rem] mb-1">
+                    {produto.titulo}
+                  </h3>
 
-    <div className="min-h-[1.5rem]">
-       <span className="text-xs line-through block text-gray-400">
-            R$ {produto.preco.toFixed(2)}
-          </span>
-          <span className="font-semibold text-green-600">
-            R$ {produto.preco_desconto!.toFixed(2)}
-          </span>
-    </div>
+                  <div className="min-h-[1.5rem]">
+                    <span className="text-xs line-through block text-gray-400">
+                      R$ {produto.preco.toFixed(2)}
+                    </span>
+                    <span className="font-semibold text-green-600">
+                      R$ {produto.preco_desconto!.toFixed(2)}
+                    </span>
+                  </div>
 
-    <button
-      onClick={(e) => {
-        e.preventDefault()
-        e.stopPropagation()
-        adicionarProduto(produto, 1)
-      }}
-      className="mt-3 w-full py-2 text-sm font-semibold rounded-lg bg-[rgb(var(--primary))] text-white"
-    >
-      Adicionar ao carrinho
-    </button>
-  </div>
-</Link>
-
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault()
+                      e.stopPropagation()
+                      adicionarProduto(produto, 1)
+                    }}
+                    className="mt-3 w-full py-2 text-sm font-semibold rounded-lg bg-[rgb(var(--primary))] text-white"
+                  >
+                    Adicionar ao carrinho
+                  </button>
+                </div>
+              </Link>
             ))}
           </div>
         </section>
