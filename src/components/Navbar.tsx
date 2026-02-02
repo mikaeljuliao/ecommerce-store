@@ -73,12 +73,12 @@ export function Navbar({ theme, setTheme }: NavbarProps) {
                 <ul>
                   {categorias.map(categoria => (
                     <li key={categoria.slug}>
-                      <a
-                        href={`/#${categoria.slug}`}
+                      <Link
+                        to={`/categoria/${categoria.slug}`}
                         className="block px-4 py-3 text-sm text-[rgb(var(--text-muted))] hover:bg-[rgb(var(--bg))] hover:text-[rgb(var(--text))] transition"
                       >
                         {categoria.nome}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>
@@ -172,14 +172,14 @@ export function Navbar({ theme, setTheme }: NavbarProps) {
 
             <div className="grid grid-cols-2 gap-3">
               {categorias.map(categoria => (
-                <a
+                <Link
                   key={categoria.slug}
-                  href={`/#${categoria.slug}`}
+                  to={`/categoria/${categoria.slug}`}
                   onClick={() => setMenuOpen(false)}
                   className="rounded-lg px-4 py-3 text-sm bg-[rgb(var(--bg))] text-[rgb(var(--text))] hover:bg-[rgb(var(--primary))] hover:text-white transition-transform hover:scale-[1.03]"
                 >
                   {categoria.nome}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
