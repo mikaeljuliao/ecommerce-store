@@ -13,8 +13,6 @@ interface NavbarProps {
 export function Navbar({ theme, setTheme }: NavbarProps) {
   const categorias = getCategorias()
   const [menuOpen, setMenuOpen] = useState(false)
-
-  // 🔹 TOTAL DE ITENS DO CARRINHO
   const { totalItens } = useCart()
 
   function toggleTheme() {
@@ -28,7 +26,6 @@ export function Navbar({ theme, setTheme }: NavbarProps) {
         animate-slide-down
         bg-[rgb(var(--bg-secondary))]
         border-[rgb(var(--border))]
-        transition-colors
       "
     >
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -43,34 +40,37 @@ export function Navbar({ theme, setTheme }: NavbarProps) {
           <span className="text-[rgb(var(--primary))]">Store</span>
         </a>
 
-        {/* DESKTOP */}
-        <nav className="hidden md:flex items-center gap-8 text-sm">
+        {/* NAV DESKTOP */}
+        <nav className="hidden md:block" aria-label="Menu principal">
+          <ul className="flex items-center gap-8 text-sm">
 
-          <a
-            href="/#home"
-            className="
-              relative
-              text-[rgb(var(--text-muted))]
-              hover:text-[rgb(var(--text))]
-              after:absolute after:left-0 after:-bottom-1
-              after:h-[2px] after:w-0
-              after:bg-[rgb(var(--primary))]
-              hover:after:w-full
-              after:transition-all
-            "
-          >
-            Home
-          </a>
+            {/* HOME */}
+            <li>
+              <a
+                href="/#home"
+                className="
+                  relative
+                  text-[rgb(var(--text-muted))]
+                  hover:text-[rgb(var(--text))]
+                  after:absolute after:left-0 after:-bottom-1
+                  after:h-[2px] after:w-0
+                  after:bg-[rgb(var(--primary))]
+                  hover:after:w-full
+                  after:transition-all
+                "
+              >
+                Home
+              </a>
+            </li>
 
-          {/* DROPDOWN CATEGORIAS */}
-          <div className="relative group">
-            <span className="cursor-pointer px-2 py-1 inline-flex items-center text-[rgb(var(--text-muted))] hover:text-[rgb(var(--text))] transition">
-              Categorias
-            </span>
+            {/* CATEGORIAS */}
+            <li className="relative group">
+              <span className="cursor-pointer px-2 py-1 inline-flex items-center text-[rgb(var(--text-muted))] hover:text-[rgb(var(--text))] transition">
+                Categorias
+              </span>
 
-            <div className="absolute left-0 top-full pt-3 opacity-0 invisible scale-95 group-hover:opacity-100 group-hover:visible group-hover:scale-100 transition-all z-50">
-              <div className="rounded-xl shadow-xl min-w-[220px] border bg-[rgb(var(--bg-secondary))] border-[rgb(var(--border))]">
-                <ul>
+              <div className="absolute left-0 top-full pt-3 opacity-0 invisible scale-95 group-hover:opacity-100 group-hover:visible group-hover:scale-100 transition-all z-50">
+                <ul className="rounded-xl shadow-xl min-w-[220px] border bg-[rgb(var(--bg-secondary))] border-[rgb(var(--border))]">
                   {categorias.map(categoria => (
                     <li key={categoria.slug}>
                       <Link
@@ -83,14 +83,29 @@ export function Navbar({ theme, setTheme }: NavbarProps) {
                   ))}
                 </ul>
               </div>
-            </div>
-          </div>
+            </li>
+
+            {/* SOBRE */}
+            <li>
+              <Link
+                to="/sobre"
+                className="
+                  text-[rgb(var(--text-muted))]
+                  hover:text-[rgb(var(--text))]
+                  transition
+                "
+              >
+                Sobre
+              </Link>
+            </li>
+
+          </ul>
         </nav>
 
         {/* AÇÕES */}
         <div className="flex items-center gap-4">
 
-          {/* BOTÃO TEMA */}
+          {/* TEMA */}
           <button
             onClick={toggleTheme}
             className="text-lg text-[rgb(var(--text-muted))] hover:text-[rgb(var(--text))] transition"
@@ -99,13 +114,12 @@ export function Navbar({ theme, setTheme }: NavbarProps) {
             {theme === 'light' ? '🌙' : '☀️'}
           </button>
 
-          {/* CARRINHO DESKTOP */}
+          {/* CARRINHO */}
           <Link
             to="/carrinho"
             className="hidden md:block relative text-[rgb(var(--text-muted))] hover:text-[rgb(var(--text))] transition"
           >
             🛒
-
             {totalItens > 0 && (
               <span
                 className="
@@ -115,7 +129,6 @@ export function Navbar({ theme, setTheme }: NavbarProps) {
                   w-5 h-5
                   flex items-center justify-center
                   rounded-full
-                  animate-pulse
                 "
               >
                 {totalItens}
@@ -123,25 +136,27 @@ export function Navbar({ theme, setTheme }: NavbarProps) {
             )}
           </Link>
 
-          {/* BOTÃO MOBILE */}
+          {/* MENU MOBILE */}
           <button
             className="md:hidden text-2xl text-[rgb(var(--text))]"
             onClick={() => setMenuOpen(prev => !prev)}
+            aria-label="Abrir menu"
           >
             ☰
           </button>
         </div>
       </div>
 
-      {/* MENU MOBILE */}
-      <div
+      {/* NAV MOBILE */}
+      <nav
         className={`md:hidden overflow-hidden transition-all duration-300 ${
           menuOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'
         }`}
+        aria-label="Menu mobile"
       >
-        <div className="border-t shadow-lg px-6 py-6 flex flex-col gap-6 bg-[rgb(var(--bg-secondary))] border-[rgb(var(--border))]">
+        <ul className="border-t shadow-lg px-6 py-6 flex flex-col gap-6 bg-[rgb(var(--bg-secondary))] border-[rgb(var(--border))]">
 
-          <nav className="flex flex-col gap-4 text-base font-medium">
+          <li>
             <a
               href="/#home"
               onClick={() => setMenuOpen(false)}
@@ -149,7 +164,19 @@ export function Navbar({ theme, setTheme }: NavbarProps) {
             >
               Home
             </a>
+          </li>
 
+          <li>
+            <Link
+              to="/sobre"
+              onClick={() => setMenuOpen(false)}
+              className="hover:text-[rgb(var(--primary))] transition"
+            >
+              Sobre
+            </Link>
+          </li>
+
+          <li>
             <Link
               to="/carrinho"
               onClick={() => setMenuOpen(false)}
@@ -162,30 +189,31 @@ export function Navbar({ theme, setTheme }: NavbarProps) {
                 </span>
               )}
             </Link>
-          </nav>
+          </li>
 
           {/* CATEGORIAS MOBILE */}
-          <div>
+          <li>
             <p className="text-xs uppercase mb-4 text-[rgb(var(--text-muted))]">
               Categorias
             </p>
 
-            <div className="grid grid-cols-2 gap-3">
+            <ul className="grid grid-cols-2 gap-3">
               {categorias.map(categoria => (
-                <Link
-                  key={categoria.slug}
-                  to={`/categoria/${categoria.slug}`}
-                  onClick={() => setMenuOpen(false)}
-                  className="rounded-lg px-4 py-3 text-sm bg-[rgb(var(--bg))] text-[rgb(var(--text))] hover:bg-[rgb(var(--primary))] hover:text-white transition-transform hover:scale-[1.03]"
-                >
-                  {categoria.nome}
-                </Link>
+                <li key={categoria.slug}>
+                  <Link
+                    to={`/categoria/${categoria.slug}`}
+                    onClick={() => setMenuOpen(false)}
+                    className="block rounded-lg px-4 py-3 text-sm bg-[rgb(var(--bg))] hover:bg-[rgb(var(--primary))] hover:text-white transition"
+                  >
+                    {categoria.nome}
+                  </Link>
+                </li>
               ))}
-            </div>
-          </div>
+            </ul>
+          </li>
 
-        </div>
-      </div>
+        </ul>
+      </nav>
     </header>
   )
 }

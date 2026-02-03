@@ -6,13 +6,17 @@ import Home from './Pages/Home'
 import Product from './Pages/Product'
 import Cart from './Pages/Cart'
 import { Category } from './Pages/Category'
+import Sobre from './Pages/Sobre'
+import PoliticaDePrivacidade from './Pages/PoliticaDePrivacidade'
+import TermosDeUso from './Pages/TermosDeUso'
+import TrocasEDevolucoes from './Pages/TrocasEDevolucoes'
 
 type Theme = 'light' | 'dark'
 
 function App() {
   /* =========================================
      CONTROLE GLOBAL DE TEMA
-     A ÚNICA FONTE DA VERDADE:
+     FONTE ÚNICA DA VERDADE:
      - classe .dark no body
   ========================================= */
   const [theme, setTheme] = useState<Theme>('light')
@@ -59,16 +63,27 @@ function App() {
             />
           }
         >
+          {/* PÁGINAS PRINCIPAIS */}
           <Route path="/" element={<Home />} />
           <Route path="/produto/:id" element={<Product />} />
           <Route path="/carrinho" element={<Cart />} />
 
-          {/* =========================================
-             PÁGINA DE CATEGORIA
-             slug vem da URL:
-             /categoria/:slug
-          ========================================= */}
+          {/* CATEGORIA */}
           <Route path="/categoria/:slug" element={<Category />} />
+
+          {/* =========================
+              INSTITUCIONAL
+          ========================= */}
+          <Route path="/sobre" element={<Sobre />} />
+          <Route
+            path="/politica-de-privacidade"
+            element={<PoliticaDePrivacidade />}
+          />
+          <Route path="/termos-de-uso" element={<TermosDeUso />} />
+          <Route
+            path="/trocas-e-devolucoes"
+            element={<TrocasEDevolucoes />}
+          />
         </Route>
       </Routes>
     </BrowserRouter>
