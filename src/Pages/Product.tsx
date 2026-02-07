@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import type { Product as ProductType } from '../types/Product'
 import { getProdutoPorId } from '../services/products'
 import { useCart } from '../context/CartContext'
+import { ProdutosRelacionados } from '../components/ProdutosRelacionados'
 
 export default function Product() {
   const { id } = useParams<{ id: string }>()
@@ -14,6 +15,13 @@ export default function Product() {
   const [product, setProduct] = useState<ProductType | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  })
+}, [id])
 
   useEffect(() => {
     if (!id) {
@@ -89,7 +97,7 @@ export default function Product() {
               R$ {precoFinal.toFixed(2)}
             </p>
 
-            {/* QUANTIDADE – SELECT (1 a 6) */}
+            {/* QUANTIDADE */}
             <div className="flex items-center gap-4 mb-8">
               <span className="font-medium text-gray-700">
                 Quantidade:
@@ -101,10 +109,10 @@ export default function Product() {
                 className="
                   px-4 py-2 rounded-lg border
                   bg-white
-                  focus:outline-none focus:ring-2 focus:ring-blue-500
+                  focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800
                 "
               >
-                {[1, 2, 3, 4, 5, 6].map((q) => (
+                {[1, 2, 3, 4, 5, 6].map(q => (
                   <option key={q} value={q}>
                     {q} unidade{q > 1 && 's'}
                   </option>
@@ -117,7 +125,6 @@ export default function Product() {
               onClick={() => {
                 adicionarProduto(product, quantidade)
                 setAdicionado(true)
-
                 setTimeout(() => setAdicionado(false), 1500)
               }}
               className={`
@@ -137,6 +144,12 @@ export default function Product() {
           </div>
         </div>
       </div>
+
+      {/* 🔥 PRODUTOS RELACIONADOS */}
+      <ProdutosRelacionados
+        categoriaAtual={product.categoria}
+        produtoAtualId={product.id}
+      />
     </section>
   )
 }
