@@ -1,4 +1,9 @@
-import { createContext, useContext, useState } from 'react'
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState
+} from 'react'
 import type { ReactNode } from 'react'
 import type { Product } from '../types/Product'
 
@@ -19,8 +24,32 @@ type CartContextData = {
 
 const CartContext = createContext<CartContextData | null>(null)
 
+// 🔑 chave do localStorage
+const CART_STORAGE_KEY = 'setupstore:carrinho'
+
 export function CartProvider({ children }: { children: ReactNode }) {
-  const [itens, setItens] = useState<ItemCarrinho[]>([])
+  // ✅ inicializa lendo do localStorage
+  const [itens, setItens] = useState<ItemCarrinho[]>(() => {
+    const dadosSalvos = localStorage.getItem(CART_STORAGE_KEY)
+
+    if (dadosSalvos) {
+      try {
+        return JSON.parse(dadosSalvos)
+      } catch {
+        return []
+      }
+    }
+
+    return []
+  })
+
+  // 🔄 sincroniza sempre que o carrinho mudar
+  useEffect(() => {
+    localStorage.setItem(
+      CART_STORAGE_KEY,
+      JSON.stringify(itens)
+    )
+  }, [itens])
 
   function adicionarProduto(produto: Product, quantidade: number) {
     if (quantidade <= 0) return
@@ -68,6 +97,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   function limparCarrinho() {
     setItens([])
+    localStorage.removeItem(CART_STORAGE_KEY)
   }
 
   const total = itens.reduce((soma, item) => {
