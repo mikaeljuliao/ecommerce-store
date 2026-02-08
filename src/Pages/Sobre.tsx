@@ -1,13 +1,7 @@
 import { useEffect } from 'react'
 
 export default function Sobre() {
-  /* =========================================
-     AO ENTRAR NA PÁGINA
-     - garante scroll no topo
-  ========================================= */
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }, [])
+
 
   return (
     <section className="min-h-screen bg-[rgb(var(--bg))] text-[rgb(var(--text))]">

@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import { BaseLayout } from './layouts/BaseLayout'
+import { ScrollToTop } from './routes/AppRoutes'
+
 import Home from './Pages/Home'
 import Product from './Pages/Product'
 import Cart from './Pages/Cart'
@@ -54,6 +56,9 @@ function App() {
 
   return (
     <BrowserRouter>
+      {/* 🔝 garante scroll ao topo em qualquer mudança de rota */}
+      <ScrollToTop />
+
       <Routes>
         <Route
           element={

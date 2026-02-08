@@ -1,11 +1,7 @@
 import { useEffect } from 'react'
 
 export default function PoliticaDePrivacidade() {
-  // garante que ao entrar na página vai pro topo
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
-
+ 
   return (
     <section className="min-h-screen bg-[rgb(var(--bg))] text-[rgb(var(--text))]">
       <div className="max-w-4xl mx-auto px-6 py-24">
