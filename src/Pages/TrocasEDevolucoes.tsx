@@ -1,11 +1,7 @@
 import { useEffect } from 'react'
 
 export default function TrocasEDevolucoes() {
-  // garante que a página abre no topo
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-  }, [])
-
+  
   return (
     <section className="min-h-screen bg-[rgb(var(--bg))] text-[rgb(var(--text))]">
       <div className="max-w-4xl mx-auto px-6 py-20">
