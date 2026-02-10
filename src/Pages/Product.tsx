@@ -16,12 +16,11 @@ export default function Product() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
+  const [imagemAtiva, setImagemAtiva] = useState<string>('')
+
   useEffect(() => {
-  window.scrollTo({
-    top: 0,
-    behavior: 'smooth'
-  })
-}, [id])
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [id])
 
   useEffect(() => {
     if (!id) {
@@ -31,7 +30,6 @@ export default function Product() {
     }
 
     const productId = Number(id)
-
     if (Number.isNaN(productId)) {
       setError('ID do produto inválido')
       setLoading(false)
@@ -40,8 +38,12 @@ export default function Product() {
 
     try {
       const data = getProdutoPorId(productId)
-      if (!data) setError('Produto não encontrado')
-      else setProduct(data)
+      if (!data) {
+        setError('Produto não encontrado')
+      } else {
+        setProduct(data)
+        setImagemAtiva(data.imagens[0])
+      }
     } catch {
       setError('Erro ao carregar produto')
     } finally {
@@ -68,13 +70,37 @@ export default function Product() {
       <div className="max-w-6xl mx-auto bg-[rgb(var(--surface))] rounded-2xl shadow-lg p-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
 
-          {/* IMAGEM */}
-          <div className="flex items-center justify-center bg-[rgb(var(--bg-secondary))] rounded-xl p-6">
-            <img
-              src={product.imagens[0]}
-              alt={product.titulo}
-              className="max-h-[420px] object-contain"
-            />
+          {/* GALERIA */}
+          <div className="flex flex-col gap-4">
+            <div className="flex items-center justify-center bg-[rgb(var(--bg-secondary))] rounded-xl p-6">
+              <img
+                src={imagemAtiva}
+                alt={product.titulo}
+                className="max-h-[420px] object-contain"
+              />
+            </div>
+
+            <div className="flex gap-3 justify-center">
+              {product.imagens.map((img) => (
+                <button
+                  key={img}
+                  onClick={() => setImagemAtiva(img)}
+                  className={`p-2 rounded-lg border transition
+                    ${
+                      imagemAtiva === img
+                        ? 'border-blue-600'
+                        : 'border-gray-300 hover:border-blue-400'
+                    }
+                  `}
+                >
+                  <img
+                    src={img}
+                    alt={product.titulo}
+                    className="h-16 w-16 object-contain"
+                  />
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* INFO */}
@@ -106,11 +132,8 @@ export default function Product() {
               <select
                 value={quantidade}
                 onChange={(e) => setQuantidade(Number(e.target.value))}
-                className="
-                  px-4 py-2 rounded-lg border
-                  bg-white
-                  focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800
-                "
+                className="px-4 py-2 rounded-lg border bg-white
+                  focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800"
               >
                 {[1, 2, 3, 4, 5, 6].map(q => (
                   <option key={q} value={q}>
@@ -127,10 +150,7 @@ export default function Product() {
                 setAdicionado(true)
                 setTimeout(() => setAdicionado(false), 1500)
               }}
-              className={`
-                w-full py-4 rounded-xl
-                font-semibold text-lg
-                transition
+              className={`w-full py-4 rounded-xl font-semibold text-lg transition
                 ${
                   adicionado
                     ? 'bg-green-600'
@@ -145,7 +165,6 @@ export default function Product() {
         </div>
       </div>
 
-      {/* 🔥 PRODUTOS RELACIONADOS */}
       <ProdutosRelacionados
         categoriaAtual={product.categoria}
         produtoAtualId={product.id}
