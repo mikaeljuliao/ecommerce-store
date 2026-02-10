@@ -26,8 +26,8 @@
           "id": 2,
           "titulo": "Mouse Gamer Redragon Cobra Pro RGB 16000 DPI",
           "descricao": "Mouse gamer ergonômico com sensor de alta precisão, ideal para jogos competitivos e performance extrema.",
-          "preco": 299.90,
-          "preco_desconto": 249.90,
+          "preco": 899.90,
+          "preco_desconto": 530.90,
           "em_promocao": true,
           "mais_vendido": true,
           "imagens": [
@@ -38,6 +38,73 @@
             "/imagem/gamers/Mouse-Gamer-Redragon-Cobra-Pro-RGB-4.jpg"
           ],
           "categoria": "gamers"
+        }, {
+          "id": 3,
+          "titulo": "Cadeira Gamer Fortt Xiamen Azul",
+          "descricao": "Cadeira gamer Fortt Xiamen com design moderno na cor amarela, ideal para longas sessões de jogos ou trabalho. Possui encosto reclinável até 135°, ajuste de altura, apoio para os pés e almofadas para lombar e cabeça, garantindo conforto e ergonomia no dia a dia. Estrutura reforçada, revestimento em couro PU e base giratória completam o conjunto.",
+          "preco": 299.90,
+          "preco_desconto": 249.90,
+          "em_promocao": true,
+          "mais_vendido": true,
+          "imagens": [
+            "/imagem/gamers/cadeira-gamer-azul.jpg",
+            "/imagem/gamers/cadeira-gamer-azul-2.jpg",
+            "/imagem/gamers/cadeira-gamer-azul-3.jpg",
+            "/imagem/gamers/cadeira-gamer-azul-4.jpg",
+            "/imagem/gamers/cadeira-gamer-azul-5.jpg",
+            "/imagem/gamers/cadeira-gamer-azul-6.jpg"
+          ],
+          "categoria": "gamers"
+        },
+        {
+          "id": 4,
+          "titulo": "Monitor Gamer Samsung Odyssey OLED G8 32",
+          "descricao": "Monitor gamer curvo de 27” com 180Hz, 1ms de resposta e AMD FreeSync, oferecendo imagens fluidas, alta performance e design moderno sem bordas.",
+          "preco": 1119.90,
+          "preco_desconto": 859.90,
+          "em_promocao": true,
+          "mais_vendido": true,
+          "imagens": [
+            "/imagem/gamers/Monitor-Gamer-Samsung-Odyssey.jpg",
+            "/imagem/gamers/Monitor-Gamer-Samsung-Odyssey.jpg-2",
+            "/imagem/gamers/Monitor-Gamer-Samsung-Odyssey.jpg-3",
+            "/imagem/Monitor-Gamer-Samsung-Odyssey.jpg-4",
+            "/imagem/gamers/Monitor-Gamer-Samsung-Odyssey.jpg-5",
+             "/imagem/gamers/Monitor-Gamer-Samsung-Odyssey.jpg-6"
+          ],
+          "categoria": "gamers"
+        },{
+          "id": 5,
+          "titulo": "Mouse Gamer Redragon Cobra Pro RGB 16000 DPI",
+          "descricao": "Mouse pad gamer extra grande 70x35cm com superfície speed para movimentos rápidos e precisos, borda costurada e base antiderrapante, ideal para setups gamers.",
+          "preco": 59.90,
+          "preco_desconto": 27.90,
+          "em_promocao": true,
+          "mais_vendido": true,
+          "imagens": [
+
+             "/imagem/gamers/Mouse-Pad-Gamer.webp",
+            "/imagem/gamers/Mouse-Pad-Gamer-2.jpg",
+            "/imagem/gamers/Mouse-Pad-Gamer-3.jpg",
+             "/imagem/gamers/Mouse-Pad-Gamer-4.jpg"
+           
+          ],
+          "categoria": "gamers"
+        },{
+          "id": 6,
+          "titulo": "Console PlayStation®5 Pro",
+          "descricao": "Console PlayStation 5 Pro com gráficos avançados, SSD ultrarrápido e suporte a 4K para máxima performance nos jogos.",
+          "preco": 7459.90,
+          "preco_desconto": 5219.90,
+          "em_promocao": true,
+          "mais_vendido": true,
+          "imagens": [
+            "/imagem/gamers/Console-PlayStation®5-Pro.webp",
+            "/imagem/gamers/Console-PlayStation®5-Pro-2.webp",
+            "/imagem/gamers/gamers/Console-PlayStation®5-Pro-3.webp",
+            "/imagem/gamers/gamers/Console-PlayStation®5-Pro-4.webp"
+          ],
+          "categoria": "gamers"
         }
       ]
     },
@@ -46,9 +113,9 @@
       "nome": "Tecnologia",
       "produtos": [
         {
-          "id": 3,
-          "titulo": "Smartwatch, Relógio Inteligente",
-          "descricao": "Relógio inteligente com monitoramento cardíaco, sono, atividades físicas e integração total com smartphone.",
+          "id": 7,
+          "titulo": "Samsung Galaxy S25 FE 5G 128GB 8GB RAM Câmera Tripla – Jet Black",
+          "descricao": "Celular Samsung Galaxy S25 FE 5G com 8GB de RAM, 128GB de armazenamento e câmera tripla, ideal para quem busca performance, conectividade e estilo.",
           "preco": 899.90,
           "preco_desconto": 799.90,
           "em_promocao": true,
@@ -64,7 +131,7 @@
           "categoria": "tecnologia"
         },
         {
-          "id": 4,
+          "id": 8,
           "titulo": "Fone de Ouvido Stage Hero6",
           "descricao": "Fone sem fio com cancelamento ativo de ruído, bateria de longa duração e som de alta fidelidade.",
           "preco": 699.90,
@@ -81,6 +148,58 @@
             "/imagem/tecnologia/Fone-de-Ouvido-Stage-Hero6-6.jpg"
           ],
           "categoria": "tecnologia"
+        }, {
+          "id": 9,
+          "titulo": "Samsung Galaxy S25 FE 5G 128GB 8GB RAM Câmera Tripla – Jet Black",
+          "descricao": "Celular Samsung Galaxy S25 FE 5G com 8GB de RAM, 128GB de armazenamento e câmera tripla, ideal para quem busca performance, conectividade e estilo.",
+          "preco": 3119.90,
+          "preco_desconto": 2009.90,
+          "em_promocao": true,
+          "mais_vendido": true,
+          "imagens": [
+            "/imagem/tecnologia/celular-samsung-s25.jpg",
+            "/imagem/tecnologia/celular-samsung-s25-1.jpg",
+            "/imagem/tecnologia/celular-samsung-s25-2.jpg",
+           "/imagem/tecnologia/celular-samsung-s25-3.jpg",
+            "/imagem/tecnologia/celular-samsung-s25-4.jpg",
+            "/imagem/tecnologia/Fone-de-Ouvido-Stage-Hero6-5.jpg",
+            "/imagem/tecnologia/Fone-de-Ouvido-Stage-Hero6-6.jpg"
+          ],
+          "categoria": "tecnologia"
+        }, {
+          "id": 10,
+          "titulo": "Multifuncional Epson EcoTank L6270 Wi-Fi Duplex ADF Tanque de Tinta – Preta",
+          "descricao": "Impressora multifuncional com tanque de tinta, impressão frente e verso automática, ADF e conectividade Wi-Fi e Ethernet, ideal para alta produtividade no dia a dia.",
+          "preco": 2899.90,
+          "preco_desconto": 2119.90,
+          "em_promocao": true,
+          "mais_vendido": true,
+          "imagens": [
+            "/imagem/tecnologia/Tanque de-Tinta-Colorida.jpg",
+            "/imagem/tecnologia/Tanque de-Tinta-Colorida-2.jpg",
+            "/imagem/tecnologia/Tanque de-Tinta-Colorida-3.jpg",
+            "/imagem/tecnologia/Tanque de-Tinta-Colorida-4.jpg",
+            "/imagem/tecnologia/Tanque de-Tinta-Colorida-5.jpg"
+          
+          ],
+          "categoria": "tecnologia"
+        }, {
+          "id": 11,
+          "titulo": "Smart TV Samsung 65 Crystal UHD 4K U8100F",
+          "descricao": "Smart TV 65” com resolução 4K Crystal UHD, imagens nítidas e cores vibrantes, sistema inteligente e design moderno para uma experiência completa de entretenimento em casa.",
+          "preco": 4590.90,
+          "preco_desconto": 3779.90,
+          "em_promocao": true,
+          "mais_vendido": true,
+          "imagens": [
+            "/imagem/tecnologia/Smart-TV-Samsung-65.jpg",
+            "/imagem/tecnologia/Smart-TV-Samsung-65-2.jpg",
+            "/imagem/tecnologia/Smart-TV-Samsung-65-3.jpg",
+            "/imagem/tecnologia/Smart-TV-Samsung-65-4.jpg",
+            "/imagem/tecnologia/Smart-TV-Samsung-65-5.jpg",
+            "/imagem/tecnologia/Smart-TV-Samsung-65-6.jpg"
+          ],
+          "categoria": "tecnologia"
         }
       ]
     },
@@ -89,7 +208,7 @@
       "nome": "Setup & Escritório",
       "produtos": [
         {
-          "id": 5,
+          "id": 12,
           "titulo": "Suporte Articulado para 2 Monitores",
           "descricao": "Suporte ajustável para monitor com braço articulado, ideal para ergonomia e organização do setup.",
           "preco": 349.90,
@@ -107,7 +226,7 @@
           "categoria": "setup"
         },
         {
-          "id": 6,
+          "id": 13,
           "titulo": "Mesa em L Estilo Industrial",
           "descricao": "Mesa em formato L com amplo espaço, acabamento premium e design moderno para setups completos.",
           "preco": 1299.90,
@@ -119,6 +238,54 @@
             "/imagem/setup/Mesa-Em-L-Estilo-Industrial-1.jpg",
             "/imagem/setup/Mesa-Em-L-Estilo-Industrial-2.jpg",
             "/imagem/setup/Mesa-Em-L-Estilo-Industrial-3.jpg"
+          ],
+          "categoria": "setup"
+        },{
+          "id": 14,
+          "titulo": "Cadeira de Escritório Ergonômica em Mesh Preta",
+          "descricao": "Cadeira ergonômica com encosto em mesh respirável, design confortável e ajuste ideal para longas horas de trabalho ou estudo, oferecendo suporte e bem-estar no dia a dia.",
+          "preco": 1299.90,
+          "preco_desconto": null,
+          "em_promocao": false,
+          "mais_vendido": true,
+          "imagens": [
+            "/imagem/setup/Cadeira-de-Escritório-Ergonômica.jpg",
+            "/imagem/setup/Cadeira-de-Escritório-Ergonômica-2.jpg",
+            "/imagem/setup/Cadeira-de-Escritório-Ergonômica-3.jpg",
+            "/imagem/setup/Cadeira-de-Escritório-Ergonômica-4.jpg",
+            "/imagem/setup/Cadeira-de-Escritório-Ergonômica-5.jpg"
+          ],
+          "categoria": "setup"
+        },{
+          "id": 15,
+          "titulo": "Mesa Gamer Escrivaninha com Iluminação LED RGB e Mousepad",
+          "descricao": "Mesa gamer com iluminação LED RGB customizável, suporte integrado para headset e mousepad RGB incluso. Design moderno, robusto e funcional, ideal para elevar seu setup gamer com mais estilo, organização e performance.",
+          "preco": 1299.90,
+          "preco_desconto": 637.90,
+          "em_promocao": false,
+          "mais_vendido": true,
+          "imagens": [
+            "/imagem/setup/mesa-gamer-para-jogos.jpg",
+            "/imagem/setup/mesa-gamer-para-jogos-2.jpg",
+            "/imagem/setup/mesa-gamer-para-jogos-3.jpg",
+            "/imagem/setup/mesa-gamer-para-jogos-4.jpg",
+            "/imagem/setup/mesa-gamer-para-jogos-5.jpg"
+          ],
+          "categoria": "setup"
+        },{
+          "id": 16,
+          "titulo": "Suporte Premium para Notebook e Tablet em Alumínio Ajustável",
+          "descricao": "Suporte ergonômico em alumínio, dobrável e leve, com ajuste de altura e 6 ângulos de inclinação. Compatível com notebooks e tablets, ideal para uso em desktop ou portátil, acompanha estojo para transporte e armazenamento.",
+          "preco": 57.40,
+          "preco_desconto": 29,
+          "em_promocao": false,
+          "mais_vendido": true,
+          "imagens": [
+            "/imagem/setup/Suporte-para-Notebook.jpg",
+             "/imagem/setup/Suporte-para-Notebook-2.jpg",
+             "/imagem/setup/Suporte-para-Notebook-3.jpg",
+             "/imagem/setup/Suporte-para-Notebook-4.jpg",
+             "/imagem/setup/Suporte-para-Notebook-5.jpg"
           ],
           "categoria": "setup"
         }
