@@ -16,7 +16,7 @@
             "/imagem/gamers/Teclado-Mecânico-Gamer-Switch.jpg",
             "/imagem/gamers/Teclado-Mecânico-Gamer-Switch-2.jpg",
             "/imagem/gamers/Teclado-Mecânico-Gamer-Switch-3.jpg",
-            "/imagem/gamers/Teclado-Mecânico-Gamer-Switch-4.jpg",
+            
             "/imagem/gamers/Teclado-Mecânico-Gamer-Switch-5.jpg",
             "/imagem/gamers/Teclado-Mecânico-Gamer-Switch-6.jpg"
           ],
@@ -34,7 +34,7 @@
             "/imagem/gamers/Mouse-Gamer-Redragon-Cobra-Pro-RGB.jpg",
             "/imagem/gamers/Mouse-Gamer-Redragon-Cobra-Pro-RGB-1.jpg",
             "/imagem/gamers/Mouse-Gamer-Redragon-Cobra-Pro-RGB-2.jpg",
-            "/imagem/gamers/Mouse-Gamer-Redragon-Cobra-Pro-RGB-3.jpg",
+            "/imagem/gamers/Mouse-Gamer-Redragon-Cobra-Pro-RGB--3.jpg",
             "/imagem/gamers/Mouse-Gamer-Redragon-Cobra-Pro-RGB-4.jpg"
           ],
           "categoria": "gamers"
@@ -48,10 +48,7 @@
           "mais_vendido": true,
           "imagens": [
             "/imagem/gamers/cadeira-gamer-azul.jpg",
-            "/imagem/gamers/cadeira-gamer-azul-2.jpg",
-            "/imagem/gamers/cadeira-gamer-azul-3.jpg",
-            "/imagem/gamers/cadeira-gamer-azul-4.jpg",
-            "/imagem/gamers/cadeira-gamer-azul-5.jpg",
+
             "/imagem/gamers/cadeira-gamer-azul-6.jpg"
           ],
           "categoria": "gamers"
@@ -66,11 +63,11 @@
           "mais_vendido": true,
           "imagens": [
             "/imagem/gamers/Monitor-Gamer-Samsung-Odyssey.jpg",
-            "/imagem/gamers/Monitor-Gamer-Samsung-Odyssey.jpg-2",
-            "/imagem/gamers/Monitor-Gamer-Samsung-Odyssey.jpg-3",
-            "/imagem/Monitor-Gamer-Samsung-Odyssey.jpg-4",
-            "/imagem/gamers/Monitor-Gamer-Samsung-Odyssey.jpg-5",
-             "/imagem/gamers/Monitor-Gamer-Samsung-Odyssey.jpg-6"
+            "/imagem/gamers/Monitor-Gamer-Samsung-Odyssey-2.jpg",
+            "/imagem/gamers/Monitor-Gamer-Samsung-Odyssey-3.jpg",
+            "/imagem/gamers/Monitor-Gamer-Samsung-Odyssey-4.jpg",
+            "/imagem/gamers/Monitor-Gamer-Samsung-Odyssey-5.jpg",
+             "/imagem/gamers/Monitor-Gamer-Samsung-Odyssey-6.jpg"
           ],
           "categoria": "gamers"
         },{
@@ -101,8 +98,8 @@
           "imagens": [
             "/imagem/gamers/Console-PlayStation®5-Pro.webp",
             "/imagem/gamers/Console-PlayStation®5-Pro-2.webp",
-            "/imagem/gamers/gamers/Console-PlayStation®5-Pro-3.webp",
-            "/imagem/gamers/gamers/Console-PlayStation®5-Pro-4.webp"
+            "/imagem/gamers/Console-PlayStation®5-Pro-3.webp",
+            "/imagem/gamers/Console-PlayStation®5-Pro-4.webp"
           ],
           "categoria": "gamers"
         }
@@ -114,8 +111,8 @@
       "produtos": [
         {
           "id": 7,
-          "titulo": "Samsung Galaxy S25 FE 5G 128GB 8GB RAM Câmera Tripla – Jet Black",
-          "descricao": "Celular Samsung Galaxy S25 FE 5G com 8GB de RAM, 128GB de armazenamento e câmera tripla, ideal para quem busca performance, conectividade e estilo.",
+          "titulo": "Smartwatch 1.85” HD com Chamadas Bluetooth, 100+ Modos Esportivos – iOS/Android – 2 Pulseiras – Preto",
+          "descricao": "Tecnologia e praticidade no seu pulso. O smartwatch com tela HD de 1.85” oferece navegação fluida, design moderno e recursos ideais para o dia a dia e treinos.",
           "preco": 899.90,
           "preco_desconto": 799.90,
           "em_promocao": true,
@@ -125,7 +122,7 @@
             "/imagem/tecnologia/Smartwatch-Relógio-Inteligente-1.jpg",
             "/imagem/tecnologia/Smartwatch-Relógio-Inteligente-2.jpg",
             "/imagem/tecnologia/Smartwatch-Relógio-Inteligente-3.jpg",
-            "/imagem/tecnologia/Smartwatch-Relógio-Inteligente-4.jpg",
+           
             "/imagem/tecnologia/Smartwatch-Relógio-Inteligente-5.jpg"
           ],
           "categoria": "tecnologia"
@@ -219,8 +216,8 @@
             "/imagem/setup/SUPORTE-ARTICULADO-PARA-2-MONITORES-1.jpg",
             "/imagem/setup/SUPORTE-ARTICULADO-PARA-2-MONITORES-2.jpg",
             "/imagem/setup/SUPORTE-ARTICULADO-PARA-2-MONITORES-3.jpg",
-            "/imagem/setup/SUPORTE-ARTICULADO-PARA-2-MONITORES-4.jpg",
-            "/imagem/setup/SUPORTE-ARTICULADO-PARA-2-MONITORES-5.jpg"
+            "/imagem/setup/SUPORTE-ARTICULADO-PARA-2-MONITORES-4.jpg"
+            
           ],
           "categoria": "setup"
         },
@@ -283,8 +280,7 @@
             "/imagem/setup/Suporte-para-Notebook.jpg",
              "/imagem/setup/Suporte-para-Notebook-2.jpg",
              "/imagem/setup/Suporte-para-Notebook-3.jpg",
-             "/imagem/setup/Suporte-para-Notebook-4.jpg",
-             "/imagem/setup/Suporte-para-Notebook-5.jpg"
+             "/imagem/setup/Suporte-para-Notebook-4.jpg"
           ],
           "categoria": "setup"
         }
