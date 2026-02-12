@@ -1,11 +1,24 @@
 import { Link } from 'react-router-dom'
 
 export function Hero() {
+
+  function scrollParaCategorias(e: React.MouseEvent<HTMLAnchorElement>) {
+    e.preventDefault()
+
+    const section = document.getElementById('categorias')
+
+    if (section) {
+      section.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      })
+    }
+  }
+
   return (
     <section
       className="
         relative overflow-hidden
-        
         min-h-[520px]
         border border-[rgb(var(--border))]
       "
@@ -18,7 +31,7 @@ export function Hero() {
           className="w-full h-full object-cover"
         />
 
-        {/* OVERLAY PRINCIPAL (contraste) */}
+        {/* OVERLAY PRINCIPAL */}
         <div
           className="
             absolute inset-0
@@ -83,8 +96,9 @@ export function Hero() {
 
           {/* BOTÕES */}
           <div className="flex flex-wrap gap-4 pt-4">
-            <Link
-              to="#categorias"
+            <a
+              href="#categorias"
+              onClick={scrollParaCategorias}
               className="
                 px-6 py-3 rounded-xl font-semibold
                 bg-[rgb(var(--primary))]
@@ -94,10 +108,10 @@ export function Hero() {
               "
             >
               Explorar produtos
-            </Link>
+            </a>
 
             <Link
-              to="#"
+              to="/sobre"
               className="
                 px-6 py-3 rounded-xl font-semibold
                 border border-white/30
@@ -111,7 +125,6 @@ export function Hero() {
           </div>
         </div>
 
-        {/* LADO DIREITO (vazio propositalmente) */}
         <div className="hidden lg:block" />
       </div>
     </section>
