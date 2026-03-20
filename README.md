@@ -1,73 +1,70 @@
-# React + TypeScript + Vite
+# 🛒 E-commerce Tech
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação front-end de e-commerce desenvolvida com foco em **organização de código, componentização e experiência do usuário**.
 
-Currently, two official plugins are available:
+O projeto simula uma loja virtual, com renderização dinâmica de produtos, navegação fluida e uma estrutura pensada para manutenção e evolução.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Demo
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+🔗 https://ecommerce-store-op.netlify.app/
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 📌 Objetivo do projeto
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Desenvolver uma aplicação que simulasse um cenário real de e-commerce, aplicando conceitos fundamentais do desenvolvimento front-end moderno:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Estrutura baseada em componentes  
+- Separação de responsabilidades  
+- Organização de código escalável  
+- Consumo de dados dinâmicos  
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🧠 Decisões técnicas
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Durante o desenvolvimento, foram priorizados:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Componentização para reutilização de código  
+- Uso da Context API para gerenciamento de estado global  
+- Organização de pastas visando escalabilidade  
+- Separação entre lógica e interface  
+- Estrutura limpa e de fácil manutenção  
+
+---
+
+## 🔥 Principais aprendizados
+
+- Construção de interfaces mais organizadas  
+- Reutilização de componentes em aplicações reais  
+- Estruturação de projetos front-end escaláveis  
+- Gerenciamento de estado com Context API  
+- Melhor entendimento do fluxo de dados em aplicações  
+
+---
+
+## 🛠️ Tecnologias utilizadas
+
+- React  
+- TypeScript  
+- JavaScript  
+- Tailwind CSS  
+
+---
+
+## 📂 Estrutura do projeto
+
+A estrutura foi organizada visando **escalabilidade e separação de responsabilidades**, facilitando manutenção e evolução da aplicação.
+
+```bash
+src/
+  components/    # Componentes reutilizáveis da interface
+  context/       # Gerenciamento de estado global (Context API)
+  data/          # Dados simulados (mock) em JSON
+  layouts/       # Estruturas base de layout da aplicação
+  pages/         # Páginas/telas principais
+  routes/        # Configuração de rotas da aplicação
+  services/      # Funções de acesso e manipulação de dados
+  types/         # Tipagens globais (TypeScript)
